@@ -77,19 +77,18 @@
             loginCard.Controls.Add(passwordTextBox);
             loginCard.Dock = DockStyle.Fill;
             loginCard.Location = new Point(0, 0);
-            loginCard.Margin = new Padding(4, 5, 4, 5);
+            loginCard.Margin = new Padding(3, 4, 3, 4);
             loginCard.Name = "loginCard";
-            loginCard.Size = new Size(1271, 840);
+            loginCard.Size = new Size(1017, 672);
             loginCard.TabIndex = 1;
             // 
             // label7
             // 
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label7.ForeColor = Color.FromArgb(31, 41, 55);
-            label7.Location = new Point(268, 612);
-            label7.Margin = new Padding(4, 0, 4, 0);
+            label7.Location = new Point(214, 490);
             label7.Name = "label7";
-            label7.Size = new Size(197, 51);
+            label7.Size = new Size(158, 41);
             label7.TabIndex = 21;
             label7.Text = "Telepon";
             label7.TextAlign = ContentAlignment.MiddleLeft;
@@ -98,10 +97,9 @@
             // 
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label6.ForeColor = Color.FromArgb(31, 41, 55);
-            label6.Location = new Point(268, 551);
-            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Location = new Point(214, 441);
             label6.Name = "label6";
-            label6.Size = new Size(197, 51);
+            label6.Size = new Size(158, 41);
             label6.TabIndex = 20;
             label6.Text = "Tanggal Lahir";
             label6.TextAlign = ContentAlignment.MiddleLeft;
@@ -110,10 +108,9 @@
             // 
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label4.ForeColor = Color.FromArgb(31, 41, 55);
-            label4.Location = new Point(268, 423);
-            label4.Margin = new Padding(4, 0, 4, 0);
+            label4.Location = new Point(214, 338);
             label4.Name = "label4";
-            label4.Size = new Size(185, 51);
+            label4.Size = new Size(148, 41);
             label4.TabIndex = 18;
             label4.Text = "Password";
             label4.TextAlign = ContentAlignment.MiddleLeft;
@@ -122,10 +119,9 @@
             // 
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label3.ForeColor = Color.FromArgb(31, 41, 55);
-            label3.Location = new Point(268, 357);
-            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Location = new Point(214, 286);
             label3.Name = "label3";
-            label3.Size = new Size(185, 51);
+            label3.Size = new Size(148, 41);
             label3.TabIndex = 17;
             label3.Text = "Username";
             label3.TextAlign = ContentAlignment.MiddleLeft;
@@ -134,10 +130,9 @@
             // 
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label2.ForeColor = Color.FromArgb(31, 41, 55);
-            label2.Location = new Point(268, 294);
-            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Location = new Point(214, 235);
             label2.Name = "label2";
-            label2.Size = new Size(185, 51);
+            label2.Size = new Size(148, 41);
             label2.TabIndex = 16;
             label2.Text = "Nama Lengkap";
             label2.TextAlign = ContentAlignment.MiddleLeft;
@@ -146,11 +141,11 @@
             // 
             Telepon_Textbox.BorderStyle = BorderStyle.FixedSingle;
             Telepon_Textbox.Font = new Font("Segoe UI", 12F);
-            Telepon_Textbox.Location = new Point(479, 619);
-            Telepon_Textbox.Margin = new Padding(4, 5, 4, 5);
+            Telepon_Textbox.Location = new Point(383, 495);
+            Telepon_Textbox.Margin = new Padding(3, 4, 3, 4);
             Telepon_Textbox.Name = "Telepon_Textbox";
             Telepon_Textbox.PlaceholderText = "Nomor Telepon";
-            Telepon_Textbox.Size = new Size(405, 39);
+            Telepon_Textbox.Size = new Size(324, 34);
             Telepon_Textbox.TabIndex = 15;
             Telepon_Textbox.TextAlign = HorizontalAlignment.Center;
             Telepon_Textbox.UseSystemPasswordChar = true;
@@ -158,20 +153,21 @@
             // tanggalLahir_Textbox
             // 
             tanggalLahir_Textbox.Font = new Font("Segoe UI", 12F);
-            tanggalLahir_Textbox.Location = new Point(485, 555);
+            tanggalLahir_Textbox.Location = new Point(388, 444);
+            tanggalLahir_Textbox.Margin = new Padding(2);
             tanggalLahir_Textbox.Name = "tanggalLahir_Textbox";
-            tanggalLahir_Textbox.Size = new Size(399, 39);
+            tanggalLahir_Textbox.Size = new Size(320, 34);
             tanggalLahir_Textbox.TabIndex = 14;
             // 
             // confirmPw_textBox
             // 
             confirmPw_textBox.BorderStyle = BorderStyle.FixedSingle;
             confirmPw_textBox.Font = new Font("Segoe UI", 12F);
-            confirmPw_textBox.Location = new Point(479, 493);
-            confirmPw_textBox.Margin = new Padding(4, 5, 4, 5);
+            confirmPw_textBox.Location = new Point(383, 394);
+            confirmPw_textBox.Margin = new Padding(3, 4, 3, 4);
             confirmPw_textBox.Name = "confirmPw_textBox";
             confirmPw_textBox.PlaceholderText = "Konfirmasi Password";
-            confirmPw_textBox.Size = new Size(405, 39);
+            confirmPw_textBox.Size = new Size(324, 34);
             confirmPw_textBox.TabIndex = 13;
             confirmPw_textBox.TextAlign = HorizontalAlignment.Center;
             confirmPw_textBox.UseSystemPasswordChar = true;
@@ -181,11 +177,11 @@
             nama_lengkapTextbox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             nama_lengkapTextbox.BorderStyle = BorderStyle.FixedSingle;
             nama_lengkapTextbox.Font = new Font("Segoe UI", 12F);
-            nama_lengkapTextbox.Location = new Point(479, 301);
-            nama_lengkapTextbox.Margin = new Padding(4, 5, 4, 5);
+            nama_lengkapTextbox.Location = new Point(383, 241);
+            nama_lengkapTextbox.Margin = new Padding(3, 4, 3, 4);
             nama_lengkapTextbox.Name = "nama_lengkapTextbox";
             nama_lengkapTextbox.PlaceholderText = "Nama Lengkap";
-            nama_lengkapTextbox.Size = new Size(405, 39);
+            nama_lengkapTextbox.Size = new Size(324, 34);
             nama_lengkapTextbox.TabIndex = 12;
             nama_lengkapTextbox.TextAlign = HorizontalAlignment.Center;
             // 
@@ -193,10 +189,11 @@
             // 
             pictureBox3.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(224, 3);
+            pictureBox3.Location = new Point(214, 0);
+            pictureBox3.Margin = new Padding(2);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(306, 248);
-            pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox3.Size = new Size(247, 202);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 11;
             pictureBox3.TabStop = false;
             // 
@@ -204,9 +201,10 @@
             // 
             masuk_link.AutoSize = true;
             masuk_link.Font = new Font("Segoe UI", 10F);
-            masuk_link.Location = new Point(670, 773);
+            masuk_link.Location = new Point(536, 618);
+            masuk_link.Margin = new Padding(2, 0, 2, 0);
             masuk_link.Name = "masuk_link";
-            masuk_link.Size = new Size(124, 28);
+            masuk_link.Size = new Size(107, 23);
             masuk_link.TabIndex = 10;
             masuk_link.TabStop = true;
             masuk_link.Text = "Masuk disini.";
@@ -216,18 +214,20 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F);
-            label1.Location = new Point(478, 773);
+            label1.Location = new Point(382, 618);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(186, 28);
+            label1.Size = new Size(164, 23);
             label1.TabIndex = 9;
             label1.Text = "Sudah punya akun?.";
             // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 14F);
-            button1.Location = new Point(586, 688);
+            button1.Location = new Point(469, 550);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
-            button1.Size = new Size(143, 58);
+            button1.Size = new Size(114, 46);
             button1.TabIndex = 8;
             button1.Text = "Daftar";
             button1.UseVisualStyleBackColor = true;
@@ -236,9 +236,10 @@
             // 
             pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(536, 32);
+            pictureBox2.Location = new Point(445, 26);
+            pictureBox2.Margin = new Padding(2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(440, 183);
+            pictureBox2.Size = new Size(281, 146);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 7;
             pictureBox2.TabStop = false;
@@ -248,8 +249,9 @@
             pictureBox1.BackgroundImageLayout = ImageLayout.Center;
             pictureBox1.Dock = DockStyle.Top;
             pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1271, 205);
+            pictureBox1.Size = new Size(1017, 164);
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
@@ -258,10 +260,9 @@
             // 
             titleLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             titleLabel.ForeColor = Color.FromArgb(31, 41, 55);
-            titleLabel.Location = new Point(497, 218);
-            titleLabel.Margin = new Padding(4, 0, 4, 0);
+            titleLabel.Location = new Point(398, 174);
             titleLabel.Name = "titleLabel";
-            titleLabel.Size = new Size(387, 51);
+            titleLabel.Size = new Size(310, 41);
             titleLabel.TabIndex = 1;
             titleLabel.Text = "Daftar Akun";
             titleLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -271,11 +272,11 @@
             usernameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             usernameTextBox.BorderStyle = BorderStyle.FixedSingle;
             usernameTextBox.Font = new Font("Segoe UI", 12F);
-            usernameTextBox.Location = new Point(479, 364);
-            usernameTextBox.Margin = new Padding(4, 5, 4, 5);
+            usernameTextBox.Location = new Point(383, 291);
+            usernameTextBox.Margin = new Padding(3, 4, 3, 4);
             usernameTextBox.Name = "usernameTextBox";
             usernameTextBox.PlaceholderText = "Username";
-            usernameTextBox.Size = new Size(405, 39);
+            usernameTextBox.Size = new Size(324, 34);
             usernameTextBox.TabIndex = 2;
             usernameTextBox.TextAlign = HorizontalAlignment.Center;
             // 
@@ -283,22 +284,23 @@
             // 
             passwordTextBox.BorderStyle = BorderStyle.FixedSingle;
             passwordTextBox.Font = new Font("Segoe UI", 12F);
-            passwordTextBox.Location = new Point(479, 430);
-            passwordTextBox.Margin = new Padding(4, 5, 4, 5);
+            passwordTextBox.Location = new Point(383, 344);
+            passwordTextBox.Margin = new Padding(3, 4, 3, 4);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.PlaceholderText = "Password";
-            passwordTextBox.Size = new Size(405, 39);
+            passwordTextBox.Size = new Size(324, 34);
             passwordTextBox.TabIndex = 3;
             passwordTextBox.TextAlign = HorizontalAlignment.Center;
             passwordTextBox.UseSystemPasswordChar = true;
             // 
             // RegisterForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1271, 840);
+            ClientSize = new Size(1017, 672);
             Controls.Add(loginCard);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(2);
             MaximizeBox = false;
             Name = "RegisterForm";
             StartPosition = FormStartPosition.CenterScreen;
