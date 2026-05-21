@@ -37,10 +37,9 @@ partial class SplashForm
         // 
         titleLabel.Font = new Font("Segoe UI", 22F, FontStyle.Bold);
         titleLabel.ForeColor = Color.FromArgb(21, 101, 192);
-        titleLabel.Location = new Point(13, 353);
-        titleLabel.Margin = new Padding(4, 0, 4, 0);
+        titleLabel.Location = new Point(10, 282);
         titleLabel.Name = "titleLabel";
-        titleLabel.Size = new Size(743, 73);
+        titleLabel.Size = new Size(594, 58);
         titleLabel.TabIndex = 1;
         titleLabel.Text = "Bromo Airlines";
         titleLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -49,23 +48,24 @@ partial class SplashForm
         // 
         pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
         pictureBox1.BackgroundImageLayout = ImageLayout.None;
-        pictureBox1.Location = new Point(84, -1);
+        pictureBox1.Location = new Point(24, -50);
+        pictureBox1.Margin = new Padding(2, 2, 2, 2);
         pictureBox1.Name = "pictureBox1";
-        pictureBox1.Size = new Size(573, 439);
+        pictureBox1.Size = new Size(458, 351);
         pictureBox1.TabIndex = 2;
         pictureBox1.TabStop = false;
         // 
         // SplashForm
         // 
-        AutoScaleDimensions = new SizeF(10F, 25F);
+        AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.White;
-        ClientSize = new Size(743, 533);
+        ClientSize = new Size(594, 426);
         Controls.Add(titleLabel);
         Controls.Add(pictureBox1);
         DoubleBuffered = true;
         FormBorderStyle = FormBorderStyle.None;
-        Margin = new Padding(4, 5, 4, 5);
+        Margin = new Padding(3, 4, 3, 4);
         Name = "SplashForm";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Bromo Airlines";

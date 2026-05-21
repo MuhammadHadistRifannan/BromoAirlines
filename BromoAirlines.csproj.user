@@ -17,22 +17,19 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\MasterBandaraForm.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\MasterDataForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Forms\MasterJadwalPenerbanganForm.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\MasterKodePromoForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Forms\MasterMaskapaiForm.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\MasterStatusPenerbanganForm.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\RegisterForm.cs">
       <SubType>Form</SubType>

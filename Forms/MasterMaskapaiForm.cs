@@ -1,8 +1,8 @@
 namespace BromoAirlines.Forms;
 
-public partial class MasterMaskapaiForm : MasterDataForm
+public partial class MasterMaskapaiForm
 {
-    public MasterMaskapaiForm() : base("Master Maskapai")
+    public MasterMaskapaiForm()
     {
         InitializeComponent();
     }

@@ -1,8 +1,8 @@
 namespace BromoAirlines.Forms;
 
-public partial class MasterStatusPenerbanganForm : MasterDataForm
+public partial class MasterStatusPenerbanganForm : Form
 {
-    public MasterStatusPenerbanganForm() : base("Master Status Penerbangan")
+    public MasterStatusPenerbanganForm() 
     {
         InitializeComponent();
     }
