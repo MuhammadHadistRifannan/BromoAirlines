@@ -1,6 +1,6 @@
 namespace BromoAirlines.Forms;
 
-public partial class BookingForm : UserControl
+public partial class BookingForm : Form
 {
     public BookingForm()
     {
