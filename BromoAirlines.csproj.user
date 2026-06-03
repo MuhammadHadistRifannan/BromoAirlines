@@ -7,9 +7,6 @@
     <Compile Update="Forms\CustomerMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\Sidebar\DashboardForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Forms\DashboardHomePanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -39,6 +36,9 @@
     </Compile>
     <Compile Update="Forms\SearchFlightForm.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Sidebar\DashboardForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\SplashForm.cs">
       <SubType>Form</SubType>

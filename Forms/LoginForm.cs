@@ -58,8 +58,8 @@ public partial class LoginForm : Form
 
     private void button1_Click(object sender, EventArgs e)
     {
-        var form = new DashboardForm();
-        this.Hide();
-        form.Show();
+        ////var form = new DashboardForm();
+        //this.Hide();
+        //form.Show();
     }
 }

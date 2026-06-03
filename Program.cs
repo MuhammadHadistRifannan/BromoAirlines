@@ -1,11 +1,10 @@
 namespace BromoAirlines;
-
+using BromoAirlines.Forms.Sidebar;
 static class Program
 {
     [STAThread]
     static void Main()
     {
-        ApplicationConfiguration.Initialize();
-        Application.Run(new BromoApplicationContext());
+        Application.Run(new DashboardForm());
     }
 }

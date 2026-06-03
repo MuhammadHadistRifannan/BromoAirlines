@@ -1,16 +1,18 @@
-using BromoAirlines.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 
-namespace BromoAirlines.Forms;
-
-public partial class DashboardForm : Form
+namespace BromoAirlines.Forms.Sidebar
 {
-    public DashboardForm()
+    public partial class DashboardForm : Form
     {
+        public DashboardForm()
+        {
+            InitializeComponent();
+        }
     }
-
-    public DashboardForm(Akun user)
-    {
-        InitializeComponent();
-    }
-
 }
