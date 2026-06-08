@@ -6,4 +6,9 @@ public partial class SearchFlightForm : UserControl
     {
         InitializeComponent();
     }
+
+    private void SearchFlightForm_Load(object sender, EventArgs e)
+    {
+
+    }
 }

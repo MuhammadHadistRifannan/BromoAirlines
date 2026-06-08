@@ -6,4 +6,19 @@ public partial class MasterBandaraForm : Form
     {
         InitializeComponent();
     }
+
+    private void txtAlamat_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void lblAlamat_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void txtCariBandara_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -1,15 +1,15 @@
 namespace BromoAirlines.Forms;
 
-public partial class MasterDataForm : UserControl
+public partial class FormMasterBandara : UserControl
 {
     protected DataGridView Grid => dataGridView;
 
-    public MasterDataForm()
+    public FormMasterBandara()
     {
         InitializeComponent();
     }
 
-    protected MasterDataForm(string title) : this()
+    protected FormMasterBandara(string title) : this()
     {
         titleLabel.Text = title;
     }
