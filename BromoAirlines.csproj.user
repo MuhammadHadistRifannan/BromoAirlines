@@ -29,7 +29,10 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\MasterStatusPenerbanganForm.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\ProfileForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\RegisterForm.cs">
       <SubType>Form</SubType>
