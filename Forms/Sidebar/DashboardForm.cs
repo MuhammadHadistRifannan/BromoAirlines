@@ -13,6 +13,33 @@ namespace BromoAirlines.Forms.Sidebar
         public DashboardForm()
         {
             InitializeComponent();
+            ChangePanel(new DashboardHomePanel());
+        }
+
+        void ChangePanel(Form form)
+        {
+            sidebarPanel.Controls.Clear();
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            sidebarPanel.AutoScroll = false;
+            sidebarPanel.Controls.Add(form);
+            form.Dock = DockStyle.Fill;
+            form.Show();
+        }
+
+        private void MenuPenerbanganClick(object sender, EventArgs e)
+        {
+            ChangePanel(new SearchFlightForm());
+        }
+
+        private void MenuDashboardClick(object sender, EventArgs e)
+        {
+            ChangePanel(new DashboardHomePanel());
+        }
+
+        private void MenuBandaraClick(object sender, EventArgs e)
+        {
+            ChangePanel(new MasterBandaraForm());
         }
     }
 }

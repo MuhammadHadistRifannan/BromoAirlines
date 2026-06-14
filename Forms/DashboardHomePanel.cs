@@ -1,6 +1,6 @@
 namespace BromoAirlines.Forms;
 
-public partial class DashboardHomePanel : UserControl
+public partial class DashboardHomePanel  : Form
 {
     public DashboardHomePanel()
     {

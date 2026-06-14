@@ -1,6 +1,6 @@
 namespace BromoAirlines.Forms;
 
-public partial class SearchFlightForm : UserControl
+public partial class SearchFlightForm : Form
 {
     public SearchFlightForm()
     {
@@ -8,6 +8,11 @@ public partial class SearchFlightForm : UserControl
     }
 
     private void SearchFlightForm_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private void txtKodePenerbangan_TextChanged(object sender, EventArgs e)
     {
 
     }
