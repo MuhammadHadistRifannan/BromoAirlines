@@ -1,43 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="Forms\BookingForm.cs">
+    <Compile Update="Forms\Auth\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\CustomerMainForm.cs">
+    <Compile Update="Forms\Admin\Pages\MasterBandaraForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\DashboardHomePanel.cs">
+    <Compile Update="Forms\Users\Pages\ProfileForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\LoginForm.cs">
+    <Compile Update="Forms\Auth\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\MasterBandaraForm.cs">
+    <Compile Update="Forms\Users\Pages\SearchFlightForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\MasterJadwalPenerbanganForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\MasterKodePromoForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\MasterMaskapaiForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\MasterStatusPenerbanganForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\ProfileForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\RegisterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\SearchFlightForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\Sidebar\DashboardForm.cs">
+    <Compile Update="Forms\Admin\Sidebar\DashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\SplashForm.cs">

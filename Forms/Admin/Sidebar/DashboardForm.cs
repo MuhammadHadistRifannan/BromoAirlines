@@ -13,7 +13,6 @@ namespace BromoAirlines.Forms.Sidebar
         public DashboardForm()
         {
             InitializeComponent();
-            ChangePanel(new DashboardHomePanel());
         }
 
         void ChangePanel(Form form)
@@ -34,12 +33,10 @@ namespace BromoAirlines.Forms.Sidebar
 
         private void MenuDashboardClick(object sender, EventArgs e)
         {
-            ChangePanel(new DashboardHomePanel());
         }
 
         private void MenuBandaraClick(object sender, EventArgs e)
         {
-            ChangePanel(new MasterBandaraForm());
         }
     }
 }

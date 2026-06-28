@@ -31,7 +31,6 @@
             lblTitle = new Label();
             lblSubtitle = new Label();
             pbIconProfile = new PictureBox();
-            panelLineTop = new DashboardHomePanel();
             gbDataProfile = new GroupBox();
             lblID = new Label();
             txtID = new TextBox();
@@ -103,13 +102,6 @@
             // 
             // panelLineTop
             // 
-            panelLineTop.BackColor = Color.LightGray;
-            panelLineTop.Location = new Point(30, 110);
-            panelLineTop.Margin = new Padding(3, 4, 3, 4);
-            panelLineTop.Name = "panelLineTop";
-            panelLineTop.Padding = new Padding(32, 37, 32, 37);
-            panelLineTop.Size = new Size(1130, 1);
-            panelLineTop.TabIndex = 3;
             // 
             // gbDataProfile
             // 
@@ -447,7 +439,6 @@
             Controls.Add(pnlButton);
             Controls.Add(gbUbahPassword);
             Controls.Add(gbDataProfile);
-            Controls.Add(panelLineTop);
             Controls.Add(pbIconProfile);
             Controls.Add(lblSubtitle);
             Controls.Add(lblTitle);
@@ -473,7 +464,6 @@
         private Label lblTitle;
         private Label lblSubtitle;
         private PictureBox pbIconProfile;
-        private DashboardHomePanel panelLineTop;
         private GroupBox gbDataProfile;
         private Label lblID;
         private TextBox txtID;
