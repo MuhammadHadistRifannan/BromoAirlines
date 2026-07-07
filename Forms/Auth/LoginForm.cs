@@ -9,6 +9,7 @@ public partial class LoginForm : Form
     private readonly AuthService _authService = new();
 
     public event EventHandler<Akun>? LoginSucceeded;
+    public event EventHandler? RegisterRequested;
 
     public LoginForm()
     {
@@ -18,14 +19,16 @@ public partial class LoginForm : Form
 
     private void LoginButton_Click(object? sender, EventArgs e)
     {
-        var user = _authService.Login(usernameTextBox.Text, passwordTextBox.Text);
-        if (user is null)
+        var result = _authService.Login(usernameTextBox.Text, passwordTextBox.Text);
+        messageLabel.Text = result.Message;
+        messageLabel.ForeColor = result.IsSuccess ? Color.SeaGreen : Color.Firebrick;
+
+        if (!result.IsSuccess || result.Akun is null)
         {
-            messageLabel.Text = "Username atau password tidak valid.";
             return;
         }
 
-        LoginSucceeded?.Invoke(this, user);
+        LoginSucceeded?.Invoke(this, result.Akun);
     }
 
 
@@ -42,13 +45,7 @@ public partial class LoginForm : Form
 
     private void daftar_link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
-        RegisterForm register = new RegisterForm();
-
-        register.FormClosed += (s, args) => this.Close();
-
-        register.Show();
-
-        this.Hide();
+        RegisterRequested?.Invoke(this, EventArgs.Empty);
     }
 
     private void pictureBox1_Click(object sender, EventArgs e)
@@ -58,8 +55,6 @@ public partial class LoginForm : Form
 
     private void button1_Click(object sender, EventArgs e)
     {
-        ////var form = new DashboardForm();
-        //this.Hide();
-        //form.Show();
+        LoginButton_Click(sender, e);
     }
 }

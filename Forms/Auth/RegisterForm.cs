@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+using BromoAirlines.Services;
 
 namespace BromoAirlines.Forms
 {
     public partial class RegisterForm : Form
     {
+        private readonly AuthService _authService = new();
+
+        public event EventHandler? LoginRequested;
+        public event EventHandler<string>? RegisterSucceeded;
+
         public RegisterForm()
         {
             InitializeComponent();
@@ -17,18 +16,30 @@ namespace BromoAirlines.Forms
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void masuk_link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            LoginForm login = new LoginForm();
+            LoginRequested?.Invoke(this, EventArgs.Empty);
+        }
 
-            login.FormClosed += (s, args) => this.Close();
+        private async void ButtonDaftarClick(object sender, EventArgs e)
+        {
+            var result = await _authService.RegisterAsync(
+                nama_lengkapTextbox.Text,
+                usernameTextBox.Text,
+                passwordTextBox.Text,
+                confirmPw_textBox.Text,
+                tanggalLahir_Textbox.Value,
+                Telepon_Textbox.Text);
 
-            login.Show();
+            if (!result.IsSuccess)
+            {
+                MessageBox.Show(result.Message, "BromoAirlines", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            this.Hide();
+            RegisterSucceeded?.Invoke(this, result.Message);
         }
     }
 }

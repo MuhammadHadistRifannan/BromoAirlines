@@ -55,21 +55,21 @@ partial class LoginForm
         loginCard.Controls.Add(usernameTextBox);
         loginCard.Controls.Add(passwordTextBox);
         loginCard.Controls.Add(messageLabel);
-        loginCard.Location = new Point(128, 2);
-        loginCard.Margin = new Padding(4, 5, 4, 5);
+        loginCard.Location = new Point(102, 2);
+        loginCard.Margin = new Padding(3, 4, 3, 4);
         loginCard.Name = "loginCard";
-        loginCard.Size = new Size(978, 834);
+        loginCard.Size = new Size(782, 667);
         loginCard.TabIndex = 0;
         // 
         // pictureBox3
         // 
         pictureBox3.BackgroundImageLayout = ImageLayout.Stretch;
         pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-        pictureBox3.Location = new Point(-24, 35);
+        pictureBox3.Location = new Point(20, 56);
         pictureBox3.Margin = new Padding(2);
         pictureBox3.Name = "pictureBox3";
-        pictureBox3.Size = new Size(378, 309);
-        pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
+        pictureBox3.Size = new Size(268, 232);
+        pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
         pictureBox3.TabIndex = 11;
         pictureBox3.TabStop = false;
         // 
@@ -77,10 +77,10 @@ partial class LoginForm
         // 
         daftar_link.AutoSize = true;
         daftar_link.Font = new Font("Segoe UI", 10F);
-        daftar_link.Location = new Point(580, 708);
+        daftar_link.Location = new Point(464, 566);
         daftar_link.Margin = new Padding(2, 0, 2, 0);
         daftar_link.Name = "daftar_link";
-        daftar_link.Size = new Size(117, 28);
+        daftar_link.Size = new Size(101, 23);
         daftar_link.TabIndex = 10;
         daftar_link.TabStop = true;
         daftar_link.Text = "Daftar disini";
@@ -90,20 +90,20 @@ partial class LoginForm
         // 
         label1.AutoSize = true;
         label1.Font = new Font("Segoe UI", 10F);
-        label1.Location = new Point(340, 705);
+        label1.Location = new Point(272, 564);
         label1.Margin = new Padding(2, 0, 2, 0);
         label1.Name = "label1";
-        label1.Size = new Size(234, 28);
+        label1.Size = new Size(207, 23);
         label1.TabIndex = 9;
         label1.Text = "Belum mempunyai akun?.";
         // 
         // button1
         // 
         button1.Font = new Font("Segoe UI", 14F);
-        button1.Location = new Point(456, 610);
+        button1.Location = new Point(365, 488);
         button1.Margin = new Padding(2);
         button1.Name = "button1";
-        button1.Size = new Size(142, 58);
+        button1.Size = new Size(114, 46);
         button1.TabIndex = 8;
         button1.Text = "Masuk";
         button1.UseVisualStyleBackColor = true;
@@ -113,11 +113,11 @@ partial class LoginForm
         // 
         pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
         pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-        pictureBox2.Location = new Point(342, 50);
+        pictureBox2.Location = new Point(274, 40);
         pictureBox2.Margin = new Padding(2);
         pictureBox2.Name = "pictureBox2";
-        pictureBox2.Size = new Size(635, 294);
-        pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+        pictureBox2.Size = new Size(506, 257);
+        pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
         pictureBox2.TabIndex = 7;
         pictureBox2.TabStop = false;
         // 
@@ -128,7 +128,7 @@ partial class LoginForm
         pictureBox1.Location = new Point(0, 0);
         pictureBox1.Margin = new Padding(2);
         pictureBox1.Name = "pictureBox1";
-        pictureBox1.Size = new Size(978, 371);
+        pictureBox1.Size = new Size(782, 297);
         pictureBox1.TabIndex = 6;
         pictureBox1.TabStop = false;
         pictureBox1.Click += pictureBox1_Click;
@@ -137,10 +137,9 @@ partial class LoginForm
         // 
         titleLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
         titleLabel.ForeColor = Color.FromArgb(31, 41, 55);
-        titleLabel.Location = new Point(270, 374);
-        titleLabel.Margin = new Padding(4, 0, 4, 0);
+        titleLabel.Location = new Point(216, 299);
         titleLabel.Name = "titleLabel";
-        titleLabel.Size = new Size(542, 81);
+        titleLabel.Size = new Size(434, 65);
         titleLabel.TabIndex = 1;
         titleLabel.Text = "Masuk Akun";
         titleLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -150,11 +149,11 @@ partial class LoginForm
         usernameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         usernameTextBox.BorderStyle = BorderStyle.FixedSingle;
         usernameTextBox.Font = new Font("Segoe UI", 12F);
-        usernameTextBox.Location = new Point(340, 460);
-        usernameTextBox.Margin = new Padding(4, 5, 4, 5);
+        usernameTextBox.Location = new Point(272, 368);
+        usernameTextBox.Margin = new Padding(3, 4, 3, 4);
         usernameTextBox.Name = "usernameTextBox";
         usernameTextBox.PlaceholderText = "Username";
-        usernameTextBox.Size = new Size(404, 39);
+        usernameTextBox.Size = new Size(324, 34);
         usernameTextBox.TabIndex = 2;
         usernameTextBox.TextAlign = HorizontalAlignment.Center;
         usernameTextBox.TextChanged += usernameTextBox_TextChanged;
@@ -163,11 +162,11 @@ partial class LoginForm
         // 
         passwordTextBox.BorderStyle = BorderStyle.FixedSingle;
         passwordTextBox.Font = new Font("Segoe UI", 12F);
-        passwordTextBox.Location = new Point(340, 536);
-        passwordTextBox.Margin = new Padding(4, 5, 4, 5);
+        passwordTextBox.Location = new Point(272, 429);
+        passwordTextBox.Margin = new Padding(3, 4, 3, 4);
         passwordTextBox.Name = "passwordTextBox";
         passwordTextBox.PlaceholderText = "Password";
-        passwordTextBox.Size = new Size(404, 39);
+        passwordTextBox.Size = new Size(324, 34);
         passwordTextBox.TabIndex = 3;
         passwordTextBox.TextAlign = HorizontalAlignment.Center;
         passwordTextBox.UseSystemPasswordChar = true;
@@ -175,25 +174,24 @@ partial class LoginForm
         // messageLabel
         // 
         messageLabel.ForeColor = Color.Firebrick;
-        messageLabel.Location = new Point(60, 610);
-        messageLabel.Margin = new Padding(4, 0, 4, 0);
+        messageLabel.Location = new Point(48, 488);
         messageLabel.Name = "messageLabel";
-        messageLabel.Size = new Size(422, 58);
+        messageLabel.Size = new Size(338, 46);
         messageLabel.TabIndex = 5;
         messageLabel.TextAlign = ContentAlignment.MiddleCenter;
         // 
         // LoginForm
         // 
-        AutoScaleDimensions = new SizeF(10F, 25F);
+        AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
         BackColor = Color.White;
-        ClientSize = new Size(1271, 849);
+        ClientSize = new Size(1017, 679);
         Controls.Add(loginCard);
         DoubleBuffered = true;
         FormBorderStyle = FormBorderStyle.FixedSingle;
-        Margin = new Padding(4, 5, 4, 5);
+        Margin = new Padding(3, 4, 3, 4);
         MaximizeBox = false;
-        MinimumSize = new Size(1218, 894);
+        MinimumSize = new Size(978, 725);
         Name = "LoginForm";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Login - Bromo Airlines";

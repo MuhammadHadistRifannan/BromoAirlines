@@ -1,0 +1,19 @@
+using BromoAirlines.Models;
+using BromoAirlines.Repositories;
+
+namespace BromoAirlines.Services;
+
+public sealed class UserBookingService
+{
+    private readonly KodePromoRepository _kodePromoRepository;
+
+    public UserBookingService(KodePromoRepository kodePromoRepository)
+    {
+        _kodePromoRepository = kodePromoRepository;
+    }
+
+    public async Task<List<KodePromo>> GetActivePromosAsync()
+    {
+        return await _kodePromoRepository.GetActiveAsync(DateTime.Today);
+    }
+}

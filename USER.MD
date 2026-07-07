@@ -66,20 +66,28 @@ Agent WAJIB mengikuti urutan berikut.
 
 # Phase 1
 
-## Sidebar User
+## Sidebar User dan Dashboard Page
 
 Tujuan
 
 * Membuat Sidebar User
+* Membuat Dashboard User
 * Navigation
 * Active Menu
 * Panel Content
+* Sidebar hanya dibuat satu kali
+* Semua halaman User dimuat ke Panel Content
+* Tidak membuka Form baru ketika berpindah menu
 
 Belum ada database.
 
 Belum ada service.
 
 Belum ada business logic.
+
+UI Phase 1 wajib dibuat melalui Windows Forms Designer atau file `.Designer.cs`.
+
+File `.cs` hanya berisi event navigation dan logic ringan.
 
 ---
 
@@ -245,6 +253,8 @@ Belum ada Event.
 
 Belum ada Database.
 
+UI dibuat menggunakan Windows Forms Designer atau `.Designer.cs`, bukan seluruhnya dibuat by code di constructor.
+
 ---
 
 ## STEP 3
@@ -305,19 +315,15 @@ Seluruh Business Logic berada pada Service.
 
 ## STEP 8
 
-Implement Validation.
+Dependency Injection.
 
-Validation dilakukan di Service.
+Inject Service ke Form.
+
+Form tidak boleh membuat object Repository sendiri.
 
 ---
 
 ## STEP 9
-
-Hubungkan Repository.
-
----
-
-## STEP 10
 
 Implement Event.
 
@@ -333,7 +339,27 @@ Booking
 
 ---
 
+## STEP 10
+
+Implement Validation.
+
+Validation dilakukan di Service.
+
+---
+
 ## STEP 11
+
+Integrasi Database.
+
+Hubungkan Repository melalui Service.
+
+Search
+
+CRUD dan workflow feature berjalan sesuai kebutuhan phase.
+
+---
+
+## STEP 12
 
 Testing.
 
@@ -450,6 +476,10 @@ Tidak membuka Form baru.
 Gunakan DataGridView untuk daftar data.
 
 Gunakan warna dan komponen UI yang konsisten.
+
+Gunakan Windows Forms Designer atau `.Designer.cs` untuk layout agar element bisa digeser melalui designer.
+
+File `.cs` hanya untuk event, navigation, dan pemanggilan service.
 
 ---
 

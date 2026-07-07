@@ -148,7 +148,6 @@
             Telepon_Textbox.Size = new Size(324, 34);
             Telepon_Textbox.TabIndex = 15;
             Telepon_Textbox.TextAlign = HorizontalAlignment.Center;
-            Telepon_Textbox.UseSystemPasswordChar = true;
             // 
             // tanggalLahir_Textbox
             // 
@@ -231,6 +230,7 @@
             button1.TabIndex = 8;
             button1.Text = "Daftar";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += ButtonDaftarClick;
             // 
             // pictureBox2
             // 

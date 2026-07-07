@@ -31,13 +31,37 @@
     <Compile Update="Forms\Admin\Pages\MasterBandaraForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\Users\Pages\ProfileForm.cs">
+    <Compile Update="Forms\Users\Pages\BookingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Pages\FlightDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Pages\HistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Pages\HomeUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Pages\MyTicketForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Pages\PassengerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Pages\PassengerInputControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Pages\PaymentForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Auth\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\Users\Pages\SearchFlightForm.cs">
+    <Compile Update="Forms\Admin\Pages\ProfileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Pages\ProfileUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Admin\Sidebar\DashboardForm.cs">
@@ -45,6 +69,18 @@
     </Compile>
     <Compile Update="Forms\SplashForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Pages\SearchFlightForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Pages\UserPlaceholderPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Sidebar\DashboardUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Users\Sidebar\SidebarUser.cs">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
 </Project>

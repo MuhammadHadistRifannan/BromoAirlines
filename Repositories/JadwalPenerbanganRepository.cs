@@ -26,6 +26,45 @@ public sealed class JadwalPenerbanganRepository
         return jadwal;
     }
 
+    public async Task<List<JadwalPenerbanganView>> SearchForUserAsync(
+        int bandaraAsalId,
+        int bandaraTujuanId,
+        DateTime tanggalBerangkat)
+    {
+        var jadwal = new List<JadwalPenerbanganView>();
+        using var connection = Database.CreateConnection();
+        using var command = CreateUserSearchCommand(
+            connection,
+            bandaraAsalId,
+            bandaraTujuanId,
+            tanggalBerangkat);
+
+        await connection.OpenAsync();
+        using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            jadwal.Add(MapJadwalView(reader));
+        }
+
+        return jadwal;
+    }
+
+    public async Task<List<JadwalPenerbanganView>> GetTopForUserAsync(int limit)
+    {
+        var jadwal = new List<JadwalPenerbanganView>();
+        using var connection = Database.CreateConnection();
+        using var command = CreateTopForUserCommand(connection, limit);
+
+        await connection.OpenAsync();
+        using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            jadwal.Add(MapJadwalView(reader));
+        }
+
+        return jadwal;
+    }
+
     public async Task InsertAsync(JadwalPenerbangan jadwal)
     {
         using var connection = Database.CreateConnection();
@@ -122,6 +161,58 @@ public sealed class JadwalPenerbanganRepository
 
         command.Parameters.AddWithValue("@Keyword", keyword.Trim());
         command.Parameters.AddWithValue("@Search", $"%{keyword.Trim()}%");
+        return command;
+    }
+
+    private static MySqlCommand CreateUserSearchCommand(
+        MySqlConnection connection,
+        int bandaraAsalId,
+        int bandaraTujuanId,
+        DateTime tanggalBerangkat)
+    {
+        var command = new MySqlCommand(
+            """
+            SELECT jp.ID, jp.KodePenerbangan,
+                   jp.BandaraKeberangkatanID, CONCAT(bk.KodeIATA, ' - ', bk.Nama) AS BandaraKeberangkatan,
+                   jp.BandaraTujuanID, CONCAT(bt.KodeIATA, ' - ', bt.Nama) AS BandaraTujuan,
+                   jp.MaskapaiID, m.Nama AS Maskapai,
+                   jp.TanggalWaktuKeberangkatan, jp.DurasiPenerbangan, jp.HargaPerTiket
+            FROM JadwalPenerbangan jp
+            INNER JOIN Bandara bk ON bk.ID = jp.BandaraKeberangkatanID
+            INNER JOIN Bandara bt ON bt.ID = jp.BandaraTujuanID
+            INNER JOIN Maskapai m ON m.ID = jp.MaskapaiID
+            WHERE jp.BandaraKeberangkatanID = @BandaraAsalID
+              AND jp.BandaraTujuanID = @BandaraTujuanID
+              AND DATE(jp.TanggalWaktuKeberangkatan) = @TanggalBerangkat
+            ORDER BY jp.TanggalWaktuKeberangkatan, jp.KodePenerbangan
+            """,
+            connection);
+
+        command.Parameters.AddWithValue("@BandaraAsalID", bandaraAsalId);
+        command.Parameters.AddWithValue("@BandaraTujuanID", bandaraTujuanId);
+        command.Parameters.AddWithValue("@TanggalBerangkat", tanggalBerangkat.Date);
+        return command;
+    }
+
+    private static MySqlCommand CreateTopForUserCommand(MySqlConnection connection, int limit)
+    {
+        var command = new MySqlCommand(
+            """
+            SELECT jp.ID, jp.KodePenerbangan,
+                   jp.BandaraKeberangkatanID, CONCAT(bk.KodeIATA, ' - ', bk.Nama) AS BandaraKeberangkatan,
+                   jp.BandaraTujuanID, CONCAT(bt.KodeIATA, ' - ', bt.Nama) AS BandaraTujuan,
+                   jp.MaskapaiID, m.Nama AS Maskapai,
+                   jp.TanggalWaktuKeberangkatan, jp.DurasiPenerbangan, jp.HargaPerTiket
+            FROM JadwalPenerbangan jp
+            INNER JOIN Bandara bk ON bk.ID = jp.BandaraKeberangkatanID
+            INNER JOIN Bandara bt ON bt.ID = jp.BandaraTujuanID
+            INNER JOIN Maskapai m ON m.ID = jp.MaskapaiID
+            ORDER BY jp.TanggalWaktuKeberangkatan DESC, jp.KodePenerbangan
+            LIMIT @Limit
+            """,
+            connection);
+
+        command.Parameters.AddWithValue("@Limit", Math.Max(1, limit));
         return command;
     }
 

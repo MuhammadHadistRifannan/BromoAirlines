@@ -5,6 +5,26 @@ namespace BromoAirlines.Repositories;
 
 public sealed class TransaksiRepository
 {
+    public async Task<int> InsertAsync(TransaksiHeader transaksiHeader, List<TransaksiDetail> details)
+    {
+        using var connection = Database.CreateConnection();
+        await connection.OpenAsync();
+        using var transaction = await connection.BeginTransactionAsync();
+
+        try
+        {
+            var transaksiHeaderId = await InsertHeaderAsync(connection, transaction, transaksiHeader);
+            await InsertDetailsAsync(connection, transaction, transaksiHeaderId, details);
+            await transaction.CommitAsync();
+            return transaksiHeaderId;
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+    }
+
     public async Task<List<TransaksiView>> SearchAsync(string keyword)
     {
         var transaksi = new List<TransaksiView>();
@@ -19,6 +39,24 @@ public sealed class TransaksiRepository
         }
 
         return transaksi;
+    }
+
+    public async Task<List<TransaksiView>> SearchByUserAsync(int akunId, string status, DateTime? startDate, DateTime? endDate)
+    {
+        var transaksi = new List<TransaksiView>();
+        using var connection = Database.CreateConnection();
+        using var command = CreateUserSearchCommand(connection, akunId, startDate, endDate);
+
+        await connection.OpenAsync();
+        using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            transaksi.Add(MapTransaksi(reader));
+        }
+
+        return string.IsNullOrWhiteSpace(status) || status.Equals("Paid", StringComparison.OrdinalIgnoreCase)
+            ? transaksi
+            : new List<TransaksiView>();
     }
 
     public async Task<List<TransaksiDetail>> GetDetailsAsync(int transaksiHeaderId)
@@ -64,6 +102,57 @@ public sealed class TransaksiRepository
         }
     }
 
+    private static async Task<int> InsertHeaderAsync(
+        MySqlConnection connection,
+        System.Data.Common.DbTransaction transaction,
+        TransaksiHeader transaksiHeader)
+    {
+        using var command = new MySqlCommand(
+            """
+            INSERT INTO TransaksiHeader
+            (AkunID, TanggalTransaksi, JadwalPenerbanganID, JumlahPenumpang, TotalHarga, KodePromoID)
+            VALUES
+            (@AkunID, @TanggalTransaksi, @JadwalPenerbanganID, @JumlahPenumpang, @TotalHarga, @KodePromoID)
+            """,
+            connection,
+            (MySqlTransaction)transaction);
+
+        command.Parameters.AddWithValue("@AkunID", transaksiHeader.AkunID);
+        command.Parameters.AddWithValue("@TanggalTransaksi", transaksiHeader.TanggalTransaksi);
+        command.Parameters.AddWithValue("@JadwalPenerbanganID", transaksiHeader.JadwalPenerbanganID);
+        command.Parameters.AddWithValue("@JumlahPenumpang", transaksiHeader.JumlahPenumpang);
+        command.Parameters.AddWithValue("@TotalHarga", transaksiHeader.TotalHarga);
+        command.Parameters.AddWithValue("@KodePromoID", transaksiHeader.KodePromoID ?? (object)DBNull.Value);
+
+        await command.ExecuteNonQueryAsync();
+        return Convert.ToInt32(command.LastInsertedId);
+    }
+
+    private static async Task InsertDetailsAsync(
+        MySqlConnection connection,
+        System.Data.Common.DbTransaction transaction,
+        int transaksiHeaderId,
+        List<TransaksiDetail> details)
+    {
+        foreach (var detail in details)
+        {
+            using var command = new MySqlCommand(
+                """
+                INSERT INTO TransaksiDetail
+                (TransaksiHeaderID, TitelPenumpang, NamaLengkapPenumpang)
+                VALUES
+                (@TransaksiHeaderID, @TitelPenumpang, @NamaLengkapPenumpang)
+                """,
+                connection,
+                (MySqlTransaction)transaction);
+
+            command.Parameters.AddWithValue("@TransaksiHeaderID", transaksiHeaderId);
+            command.Parameters.AddWithValue("@TitelPenumpang", detail.TitelPenumpang);
+            command.Parameters.AddWithValue("@NamaLengkapPenumpang", detail.NamaLengkapPenumpang);
+            await command.ExecuteNonQueryAsync();
+        }
+    }
+
     private static MySqlCommand CreateSearchCommand(MySqlConnection connection, string keyword)
     {
         var command = new MySqlCommand(
@@ -93,6 +182,39 @@ public sealed class TransaksiRepository
 
         command.Parameters.AddWithValue("@Keyword", keyword.Trim());
         command.Parameters.AddWithValue("@Search", $"%{keyword.Trim()}%");
+        return command;
+    }
+
+    private static MySqlCommand CreateUserSearchCommand(
+        MySqlConnection connection,
+        int akunId,
+        DateTime? startDate,
+        DateTime? endDate)
+    {
+        var command = new MySqlCommand(
+            """
+            SELECT th.ID, th.AkunID, a.Nama AS NamaAkun, th.TanggalTransaksi,
+                   th.JadwalPenerbanganID, jp.KodePenerbangan,
+                   CONCAT(bk.KodeIATA, ' - ', bt.KodeIATA) AS Rute,
+                   m.Nama AS Maskapai, th.JumlahPenumpang, th.TotalHarga,
+                   th.KodePromoID, COALESCE(kp.Kode, '-') AS KodePromo
+            FROM TransaksiHeader th
+            INNER JOIN Akun a ON a.ID = th.AkunID
+            INNER JOIN JadwalPenerbangan jp ON jp.ID = th.JadwalPenerbanganID
+            INNER JOIN Bandara bk ON bk.ID = jp.BandaraKeberangkatanID
+            INNER JOIN Bandara bt ON bt.ID = jp.BandaraTujuanID
+            INNER JOIN Maskapai m ON m.ID = jp.MaskapaiID
+            LEFT JOIN KodePromo kp ON kp.ID = th.KodePromoID
+            WHERE th.AkunID = @AkunID
+              AND (@StartDate IS NULL OR DATE(th.TanggalTransaksi) >= @StartDate)
+              AND (@EndDate IS NULL OR DATE(th.TanggalTransaksi) <= @EndDate)
+            ORDER BY th.TanggalTransaksi DESC, th.ID DESC
+            """,
+            connection);
+
+        command.Parameters.AddWithValue("@AkunID", akunId);
+        command.Parameters.AddWithValue("@StartDate", startDate?.Date ?? (object)DBNull.Value);
+        command.Parameters.AddWithValue("@EndDate", endDate?.Date ?? (object)DBNull.Value);
         return command;
     }
 

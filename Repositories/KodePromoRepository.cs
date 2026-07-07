@@ -10,6 +10,30 @@ public sealed class KodePromoRepository
         return await SearchAsync(string.Empty);
     }
 
+    public async Task<List<KodePromo>> GetActiveAsync(DateTime tanggal)
+    {
+        var kodePromo = new List<KodePromo>();
+        using var connection = Database.CreateConnection();
+        using var command = new MySqlCommand(
+            """
+            SELECT ID, Kode, PersentaseDiskon, MaksimumDiskon, BerlakuSampai, Deskripsi
+            FROM KodePromo
+            WHERE BerlakuSampai >= @Tanggal
+            ORDER BY BerlakuSampai, Kode
+            """,
+            connection);
+
+        command.Parameters.AddWithValue("@Tanggal", tanggal.Date);
+        await connection.OpenAsync();
+        using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            kodePromo.Add(MapKodePromo(reader));
+        }
+
+        return kodePromo;
+    }
+
     public async Task<List<KodePromo>> SearchAsync(string keyword)
     {
         var kodePromo = new List<KodePromo>();

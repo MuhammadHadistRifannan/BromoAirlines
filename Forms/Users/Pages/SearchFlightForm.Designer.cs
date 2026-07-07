@@ -1,16 +1,14 @@
-
-namespace BromoAirlines.Forms;
+namespace BromoAirlines.Forms.Users.Pages;
 
 partial class SearchFlightForm
 {
-    private System.ComponentModel.IContainer components = null!;
-    private DataGridView flightsGridView = null!;
+    private System.ComponentModel.IContainer components = null;
 
     protected override void Dispose(bool disposing)
     {
-        if (disposing)
+        if (disposing && components != null)
         {
-            components?.Dispose();
+            components.Dispose();
         }
 
         base.Dispose(disposing);
@@ -19,262 +17,242 @@ partial class SearchFlightForm
     private void InitializeComponent()
     {
         lblTitle = new Label();
-        gbSearch = new GroupBox();
+        panelSearch = new Panel();
         btnReset = new Button();
         btnSearch = new Button();
-        dtpTanggal = new DateTimePicker();
-        lblTanggal = new Label();
-        cmbMaskapai = new ComboBox();
-        lblMaskapai = new Label();
-        cmbTujuan = new ComboBox();
-        lblTujuan = new Label();
-        cmbKeberangkatan = new ComboBox();
-        lblKeberangkatan = new Label();
-        txtKodePenerbangan = new TextBox();
-        lblKode = new Label();
+        numJumlahPenumpang = new NumericUpDown();
+        lblJumlahPenumpang = new Label();
+        dtpTanggalBerangkat = new DateTimePicker();
+        lblTanggalBerangkat = new Label();
+        cmbBandaraTujuan = new ComboBox();
+        lblBandaraTujuan = new Label();
+        cmbBandaraAsal = new ComboBox();
+        lblBandaraAsal = new Label();
         lblHasil = new Label();
-        panel1 = new Panel();
-        dgvFlight = new DataGridView();
-        colID = new DataGridViewTextBoxColumn();
-        colKode = new DataGridViewTextBoxColumn();
-        colAsal = new DataGridViewTextBoxColumn();
-        colTujuan = new DataGridViewTextBoxColumn();
+        panelGrid = new Panel();
+        btnDetail = new Button();
+        gridFlight = new DataGridView();
+        colKodePenerbangan = new DataGridViewTextBoxColumn();
         colMaskapai = new DataGridViewTextBoxColumn();
-        colJadwal = new DataGridViewTextBoxColumn();
+        colBandaraAsal = new DataGridViewTextBoxColumn();
+        colBandaraTujuan = new DataGridViewTextBoxColumn();
+        colTanggalBerangkat = new DataGridViewTextBoxColumn();
+        colWaktuBerangkat = new DataGridViewTextBoxColumn();
         colDurasi = new DataGridViewTextBoxColumn();
         colHarga = new DataGridViewTextBoxColumn();
-        gbSearch.SuspendLayout();
-        panel1.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)dgvFlight).BeginInit();
+        colKursiTersedia = new DataGridViewTextBoxColumn();
+        panelSearch.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)numJumlahPenumpang).BeginInit();
+        panelGrid.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)gridFlight).BeginInit();
         SuspendLayout();
         // 
         // lblTitle
         // 
         lblTitle.AutoSize = true;
-        lblTitle.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        lblTitle.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
         lblTitle.ForeColor = Color.Navy;
-        lblTitle.Location = new Point(62, 38);
-        lblTitle.Margin = new Padding(4, 0, 4, 0);
+        lblTitle.Location = new Point(48, 42);
         lblTitle.Name = "lblTitle";
-        lblTitle.Size = new Size(604, 65);
+        lblTitle.Size = new Size(355, 54);
         lblTitle.TabIndex = 0;
-        lblTitle.Text = "SEARCH FLIGHT - ADMIN";
+        lblTitle.Text = "Cari Penerbangan";
         // 
-        // gbSearch
+        // panelSearch
         // 
-        gbSearch.Controls.Add(btnReset);
-        gbSearch.Controls.Add(btnSearch);
-        gbSearch.Controls.Add(dtpTanggal);
-        gbSearch.Controls.Add(lblTanggal);
-        gbSearch.Controls.Add(cmbMaskapai);
-        gbSearch.Controls.Add(lblMaskapai);
-        gbSearch.Controls.Add(cmbTujuan);
-        gbSearch.Controls.Add(lblTujuan);
-        gbSearch.Controls.Add(cmbKeberangkatan);
-        gbSearch.Controls.Add(lblKeberangkatan);
-        gbSearch.Controls.Add(txtKodePenerbangan);
-        gbSearch.Controls.Add(lblKode);
-        gbSearch.Location = new Point(38, 112);
-        gbSearch.Margin = new Padding(4);
-        gbSearch.Name = "gbSearch";
-        gbSearch.Padding = new Padding(4);
-        gbSearch.Size = new Size(1150, 338);
-        gbSearch.TabIndex = 1;
-        gbSearch.TabStop = false;
-        gbSearch.Text = "Data Pencarian";
+        panelSearch.BackColor = Color.White;
+        panelSearch.Controls.Add(btnReset);
+        panelSearch.Controls.Add(btnSearch);
+        panelSearch.Controls.Add(numJumlahPenumpang);
+        panelSearch.Controls.Add(lblJumlahPenumpang);
+        panelSearch.Controls.Add(dtpTanggalBerangkat);
+        panelSearch.Controls.Add(lblTanggalBerangkat);
+        panelSearch.Controls.Add(cmbBandaraTujuan);
+        panelSearch.Controls.Add(lblBandaraTujuan);
+        panelSearch.Controls.Add(cmbBandaraAsal);
+        panelSearch.Controls.Add(lblBandaraAsal);
+        panelSearch.Location = new Point(48, 124);
+        panelSearch.Name = "panelSearch";
+        panelSearch.Padding = new Padding(32);
+        panelSearch.Size = new Size(1220, 245);
+        panelSearch.TabIndex = 1;
         // 
         // btnReset
         // 
-        btnReset.BackColor = Color.DodgerBlue;
-        btnReset.ForeColor = Color.White;
-        btnReset.Location = new Point(550, 288);
-        btnReset.Margin = new Padding(4);
+        btnReset.BackColor = Color.White;
+        btnReset.Cursor = Cursors.Hand;
+        btnReset.FlatAppearance.BorderColor = Color.RoyalBlue;
+        btnReset.FlatStyle = FlatStyle.Flat;
+        btnReset.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btnReset.ForeColor = Color.RoyalBlue;
+        btnReset.Location = new Point(920, 159);
         btnReset.Name = "btnReset";
-        btnReset.Size = new Size(150, 44);
-        btnReset.TabIndex = 11;
+        btnReset.Size = new Size(130, 44);
+        btnReset.TabIndex = 9;
         btnReset.Text = "Reset";
         btnReset.UseVisualStyleBackColor = false;
+        btnReset.Click += BtnResetClick;
         // 
         // btnSearch
         // 
-        btnSearch.BackColor = Color.DodgerBlue;
+        btnSearch.BackColor = Color.RoyalBlue;
+        btnSearch.Cursor = Cursors.Hand;
+        btnSearch.FlatAppearance.BorderSize = 0;
+        btnSearch.FlatStyle = FlatStyle.Flat;
+        btnSearch.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
         btnSearch.ForeColor = Color.White;
-        btnSearch.Location = new Point(375, 288);
-        btnSearch.Margin = new Padding(4);
+        btnSearch.Location = new Point(1068, 159);
         btnSearch.Name = "btnSearch";
-        btnSearch.Size = new Size(150, 44);
-        btnSearch.TabIndex = 10;
-        btnSearch.Text = "Search";
+        btnSearch.Size = new Size(120, 44);
+        btnSearch.TabIndex = 8;
+        btnSearch.Text = "Cari";
         btnSearch.UseVisualStyleBackColor = false;
+        btnSearch.Click += BtnSearchClick;
         // 
-        // dtpTanggal
+        // numJumlahPenumpang
         // 
-        dtpTanggal.Format = DateTimePickerFormat.Short;
-        dtpTanggal.Location = new Point(288, 244);
-        dtpTanggal.Margin = new Padding(4);
-        dtpTanggal.Name = "dtpTanggal";
-        dtpTanggal.Size = new Size(312, 31);
-        dtpTanggal.TabIndex = 9;
+        numJumlahPenumpang.Location = new Point(720, 166);
+        numJumlahPenumpang.Maximum = new decimal(new int[] { 9, 0, 0, 0 });
+        numJumlahPenumpang.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+        numJumlahPenumpang.Name = "numJumlahPenumpang";
+        numJumlahPenumpang.Size = new Size(150, 27);
+        numJumlahPenumpang.TabIndex = 7;
+        numJumlahPenumpang.Value = new decimal(new int[] { 1, 0, 0, 0 });
         // 
-        // lblTanggal
+        // lblJumlahPenumpang
         // 
-        lblTanggal.AutoSize = true;
-        lblTanggal.Location = new Point(38, 250);
-        lblTanggal.Margin = new Padding(4, 0, 4, 0);
-        lblTanggal.Name = "lblTanggal";
-        lblTanggal.Size = new Size(157, 25);
-        lblTanggal.TabIndex = 8;
-        lblTanggal.Text = "Tanggal Berangkat";
+        lblJumlahPenumpang.AutoSize = true;
+        lblJumlahPenumpang.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        lblJumlahPenumpang.ForeColor = Color.Navy;
+        lblJumlahPenumpang.Location = new Point(720, 132);
+        lblJumlahPenumpang.Name = "lblJumlahPenumpang";
+        lblJumlahPenumpang.Size = new Size(164, 23);
+        lblJumlahPenumpang.TabIndex = 6;
+        lblJumlahPenumpang.Text = "Jumlah Penumpang";
         // 
-        // cmbMaskapai
+        // dtpTanggalBerangkat
         // 
-        cmbMaskapai.DropDownStyle = ComboBoxStyle.DropDownList;
-        cmbMaskapai.FormattingEnabled = true;
-        cmbMaskapai.Location = new Point(288, 194);
-        cmbMaskapai.Margin = new Padding(4);
-        cmbMaskapai.Name = "cmbMaskapai";
-        cmbMaskapai.Size = new Size(436, 33);
-        cmbMaskapai.TabIndex = 7;
+        dtpTanggalBerangkat.Format = DateTimePickerFormat.Short;
+        dtpTanggalBerangkat.Location = new Point(32, 166);
+        dtpTanggalBerangkat.Name = "dtpTanggalBerangkat";
+        dtpTanggalBerangkat.Size = new Size(300, 27);
+        dtpTanggalBerangkat.TabIndex = 5;
         // 
-        // lblMaskapai
+        // lblTanggalBerangkat
         // 
-        lblMaskapai.AutoSize = true;
-        lblMaskapai.Location = new Point(38, 200);
-        lblMaskapai.Margin = new Padding(4, 0, 4, 0);
-        lblMaskapai.Name = "lblMaskapai";
-        lblMaskapai.Size = new Size(87, 25);
-        lblMaskapai.TabIndex = 6;
-        lblMaskapai.Text = "Maskapai";
+        lblTanggalBerangkat.AutoSize = true;
+        lblTanggalBerangkat.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        lblTanggalBerangkat.ForeColor = Color.Navy;
+        lblTanggalBerangkat.Location = new Point(32, 132);
+        lblTanggalBerangkat.Name = "lblTanggalBerangkat";
+        lblTanggalBerangkat.Size = new Size(159, 23);
+        lblTanggalBerangkat.TabIndex = 4;
+        lblTanggalBerangkat.Text = "Tanggal Berangkat";
         // 
-        // cmbTujuan
+        // cmbBandaraTujuan
         // 
-        cmbTujuan.DropDownStyle = ComboBoxStyle.DropDownList;
-        cmbTujuan.FormattingEnabled = true;
-        cmbTujuan.Location = new Point(288, 144);
-        cmbTujuan.Margin = new Padding(4);
-        cmbTujuan.Name = "cmbTujuan";
-        cmbTujuan.Size = new Size(436, 33);
-        cmbTujuan.TabIndex = 5;
+        cmbBandaraTujuan.DropDownStyle = ComboBoxStyle.DropDown;
+        cmbBandaraTujuan.FormattingEnabled = true;
+        cmbBandaraTujuan.Location = new Point(570, 70);
+        cmbBandaraTujuan.Name = "cmbBandaraTujuan";
+        cmbBandaraTujuan.Size = new Size(520, 28);
+        cmbBandaraTujuan.TabIndex = 3;
         // 
-        // lblTujuan
+        // lblBandaraTujuan
         // 
-        lblTujuan.AutoSize = true;
-        lblTujuan.Location = new Point(38, 148);
-        lblTujuan.Margin = new Padding(4, 0, 4, 0);
-        lblTujuan.Name = "lblTujuan";
-        lblTujuan.Size = new Size(133, 25);
-        lblTujuan.TabIndex = 4;
-        lblTujuan.Text = "Bandara Tujuan";
+        lblBandaraTujuan.AutoSize = true;
+        lblBandaraTujuan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        lblBandaraTujuan.ForeColor = Color.Navy;
+        lblBandaraTujuan.Location = new Point(570, 36);
+        lblBandaraTujuan.Name = "lblBandaraTujuan";
+        lblBandaraTujuan.Size = new Size(132, 23);
+        lblBandaraTujuan.TabIndex = 2;
+        lblBandaraTujuan.Text = "Bandara Tujuan";
         // 
-        // cmbKeberangkatan
+        // cmbBandaraAsal
         // 
-        cmbKeberangkatan.DropDownStyle = ComboBoxStyle.DropDownList;
-        cmbKeberangkatan.FormattingEnabled = true;
-        cmbKeberangkatan.Location = new Point(288, 94);
-        cmbKeberangkatan.Margin = new Padding(4);
-        cmbKeberangkatan.Name = "cmbKeberangkatan";
-        cmbKeberangkatan.Size = new Size(436, 33);
-        cmbKeberangkatan.TabIndex = 3;
+        cmbBandaraAsal.DropDownStyle = ComboBoxStyle.DropDown;
+        cmbBandaraAsal.FormattingEnabled = true;
+        cmbBandaraAsal.Location = new Point(32, 70);
+        cmbBandaraAsal.Name = "cmbBandaraAsal";
+        cmbBandaraAsal.Size = new Size(500, 28);
+        cmbBandaraAsal.TabIndex = 1;
         // 
-        // lblKeberangkatan
+        // lblBandaraAsal
         // 
-        lblKeberangkatan.AutoSize = true;
-        lblKeberangkatan.Location = new Point(38, 100);
-        lblKeberangkatan.Margin = new Padding(4, 0, 4, 0);
-        lblKeberangkatan.Name = "lblKeberangkatan";
-        lblKeberangkatan.Size = new Size(199, 25);
-        lblKeberangkatan.TabIndex = 2;
-        lblKeberangkatan.Text = "Bandara Keberangkatan";
-        // 
-        // txtKodePenerbangan
-        // 
-        txtKodePenerbangan.Location = new Point(288, 44);
-        txtKodePenerbangan.Margin = new Padding(4);
-        txtKodePenerbangan.Name = "txtKodePenerbangan";
-        txtKodePenerbangan.Size = new Size(436, 31);
-        txtKodePenerbangan.TabIndex = 1;
-        txtKodePenerbangan.TextChanged += txtKodePenerbangan_TextChanged;
-        // 
-        // lblKode
-        // 
-        lblKode.AutoSize = true;
-        lblKode.Location = new Point(38, 50);
-        lblKode.Margin = new Padding(4, 0, 4, 0);
-        lblKode.Name = "lblKode";
-        lblKode.Size = new Size(161, 25);
-        lblKode.TabIndex = 0;
-        lblKode.Text = "Kode Penerbangan";
+        lblBandaraAsal.AutoSize = true;
+        lblBandaraAsal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        lblBandaraAsal.ForeColor = Color.Navy;
+        lblBandaraAsal.Location = new Point(32, 36);
+        lblBandaraAsal.Name = "lblBandaraAsal";
+        lblBandaraAsal.Size = new Size(113, 23);
+        lblBandaraAsal.TabIndex = 0;
+        lblBandaraAsal.Text = "Bandara Asal";
         // 
         // lblHasil
         // 
         lblHasil.AutoSize = true;
-        lblHasil.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+        lblHasil.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
         lblHasil.ForeColor = Color.Navy;
-        lblHasil.Location = new Point(38, 462);
-        lblHasil.Margin = new Padding(4, 0, 4, 0);
+        lblHasil.Location = new Point(48, 410);
         lblHasil.Name = "lblHasil";
-        lblHasil.Size = new Size(189, 32);
-        lblHasil.TabIndex = 12;
-        lblHasil.Text = "Hasil Pencarian";
+        lblHasil.Size = new Size(237, 46);
+        lblHasil.TabIndex = 2;
+        lblHasil.Text = "Daftar Jadwal";
         // 
-        // panel1
+        // panelGrid
         // 
-        panel1.Controls.Add(dgvFlight);
-        panel1.Dock = DockStyle.Bottom;
-        panel1.Location = new Point(40, 658);
-        panel1.Name = "panel1";
-        panel1.Size = new Size(976, 343);
-        panel1.TabIndex = 13;
+        panelGrid.BackColor = Color.White;
+        panelGrid.Controls.Add(btnDetail);
+        panelGrid.Controls.Add(gridFlight);
+        panelGrid.Location = new Point(48, 482);
+        panelGrid.Name = "panelGrid";
+        panelGrid.Padding = new Padding(24);
+        panelGrid.Size = new Size(1220, 470);
+        panelGrid.TabIndex = 3;
         // 
-        // dgvFlight
+        // btnDetail
         // 
-        dgvFlight.AllowUserToAddRows = false;
-        dgvFlight.AllowUserToDeleteRows = false;
-        dgvFlight.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-        dgvFlight.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dgvFlight.Columns.AddRange(new DataGridViewColumn[] { colID, colKode, colAsal, colTujuan, colMaskapai, colJadwal, colDurasi, colHarga });
-        dgvFlight.Dock = DockStyle.Bottom;
-        dgvFlight.Location = new Point(0, 6);
-        dgvFlight.Margin = new Padding(4);
-        dgvFlight.Name = "dgvFlight";
-        dgvFlight.ReadOnly = true;
-        dgvFlight.RowHeadersVisible = false;
-        dgvFlight.RowHeadersWidth = 51;
-        dgvFlight.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        dgvFlight.Size = new Size(976, 337);
-        dgvFlight.TabIndex = 3;
+        btnDetail.BackColor = Color.RoyalBlue;
+        btnDetail.Cursor = Cursors.Hand;
+        btnDetail.FlatAppearance.BorderSize = 0;
+        btnDetail.FlatStyle = FlatStyle.Flat;
+        btnDetail.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        btnDetail.ForeColor = Color.White;
+        btnDetail.Location = new Point(1000, 402);
+        btnDetail.Name = "btnDetail";
+        btnDetail.Size = new Size(196, 44);
+        btnDetail.TabIndex = 1;
+        btnDetail.Text = "Lihat Detail";
+        btnDetail.UseVisualStyleBackColor = false;
+        btnDetail.Click += BtnDetailClick;
         // 
-        // colID
+        // gridFlight
         // 
-        colID.HeaderText = "ID";
-        colID.MinimumWidth = 6;
-        colID.Name = "colID";
-        colID.ReadOnly = true;
-        colID.Width = 66;
+        gridFlight.AllowUserToAddRows = false;
+        gridFlight.AllowUserToDeleteRows = false;
+        gridFlight.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        gridFlight.BackgroundColor = Color.White;
+        gridFlight.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        gridFlight.Columns.AddRange(new DataGridViewColumn[] { colKodePenerbangan, colMaskapai, colBandaraAsal, colBandaraTujuan, colTanggalBerangkat, colWaktuBerangkat, colDurasi, colHarga, colKursiTersedia });
+        gridFlight.Dock = DockStyle.Fill;
+        gridFlight.Location = new Point(24, 24);
+        gridFlight.MultiSelect = false;
+        gridFlight.Name = "gridFlight";
+        gridFlight.ReadOnly = true;
+        gridFlight.RowHeadersVisible = false;
+        gridFlight.RowHeadersWidth = 51;
+        gridFlight.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        gridFlight.Size = new Size(1172, 362);
+        gridFlight.TabIndex = 0;
+        gridFlight.CellDoubleClick += GridFlightCellDoubleClick;
         // 
-        // colKode
+        // colKodePenerbangan
         // 
-        colKode.HeaderText = "Kode Penerbangan";
-        colKode.MinimumWidth = 6;
-        colKode.Name = "colKode";
-        colKode.ReadOnly = true;
-        colKode.Width = 180;
-        // 
-        // colAsal
-        // 
-        colAsal.HeaderText = "Bandara Keberangkatan";
-        colAsal.MinimumWidth = 6;
-        colAsal.Name = "colAsal";
-        colAsal.ReadOnly = true;
-        colAsal.Width = 215;
-        // 
-        // colTujuan
-        // 
-        colTujuan.HeaderText = "Bandara Tujuan";
-        colTujuan.MinimumWidth = 6;
-        colTujuan.Name = "colTujuan";
-        colTujuan.ReadOnly = true;
-        colTujuan.Width = 155;
+        colKodePenerbangan.HeaderText = "Kode";
+        colKodePenerbangan.MinimumWidth = 6;
+        colKodePenerbangan.Name = "colKodePenerbangan";
+        colKodePenerbangan.ReadOnly = true;
         // 
         // colMaskapai
         // 
@@ -282,15 +260,34 @@ partial class SearchFlightForm
         colMaskapai.MinimumWidth = 6;
         colMaskapai.Name = "colMaskapai";
         colMaskapai.ReadOnly = true;
-        colMaskapai.Width = 123;
         // 
-        // colJadwal
+        // colBandaraAsal
         // 
-        colJadwal.HeaderText = "Tanggal Berangkat";
-        colJadwal.MinimumWidth = 6;
-        colJadwal.Name = "colJadwal";
-        colJadwal.ReadOnly = true;
-        colJadwal.Width = 177;
+        colBandaraAsal.HeaderText = "Asal";
+        colBandaraAsal.MinimumWidth = 6;
+        colBandaraAsal.Name = "colBandaraAsal";
+        colBandaraAsal.ReadOnly = true;
+        // 
+        // colBandaraTujuan
+        // 
+        colBandaraTujuan.HeaderText = "Tujuan";
+        colBandaraTujuan.MinimumWidth = 6;
+        colBandaraTujuan.Name = "colBandaraTujuan";
+        colBandaraTujuan.ReadOnly = true;
+        // 
+        // colTanggalBerangkat
+        // 
+        colTanggalBerangkat.HeaderText = "Tanggal";
+        colTanggalBerangkat.MinimumWidth = 6;
+        colTanggalBerangkat.Name = "colTanggalBerangkat";
+        colTanggalBerangkat.ReadOnly = true;
+        // 
+        // colWaktuBerangkat
+        // 
+        colWaktuBerangkat.HeaderText = "Waktu";
+        colWaktuBerangkat.MinimumWidth = 6;
+        colWaktuBerangkat.Name = "colWaktuBerangkat";
+        colWaktuBerangkat.ReadOnly = true;
         // 
         // colDurasi
         // 
@@ -298,62 +295,66 @@ partial class SearchFlightForm
         colDurasi.MinimumWidth = 6;
         colDurasi.Name = "colDurasi";
         colDurasi.ReadOnly = true;
-        colDurasi.Width = 98;
         // 
         // colHarga
         // 
-        colHarga.HeaderText = "Harga Tiket";
+        colHarga.HeaderText = "Harga";
         colHarga.MinimumWidth = 6;
         colHarga.Name = "colHarga";
         colHarga.ReadOnly = true;
-        colHarga.Width = 127;
+        // 
+        // colKursiTersedia
+        // 
+        colKursiTersedia.HeaderText = "Kursi";
+        colKursiTersedia.MinimumWidth = 6;
+        colKursiTersedia.Name = "colKursiTersedia";
+        colKursiTersedia.ReadOnly = true;
         // 
         // SearchFlightForm
         // 
-        AutoScaleDimensions = new SizeF(10F, 25F);
+        AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1056, 1047);
-        Controls.Add(panel1);
+        BackColor = SystemColors.Control;
+        ClientSize = new Size(1375, 1050);
+        Controls.Add(panelGrid);
         Controls.Add(lblHasil);
-        Controls.Add(gbSearch);
+        Controls.Add(panelSearch);
         Controls.Add(lblTitle);
         FormBorderStyle = FormBorderStyle.None;
-        Location = new Point(30, 400);
-        Margin = new Padding(4, 5, 4, 5);
         Name = "SearchFlightForm";
-        Padding = new Padding(40, 46, 40, 46);
-        Load += SearchFlightForm_Load;
-        gbSearch.ResumeLayout(false);
-        gbSearch.PerformLayout();
-        panel1.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)dgvFlight).EndInit();
+        Text = "Cari Penerbangan";
+        panelSearch.ResumeLayout(false);
+        panelSearch.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)numJumlahPenumpang).EndInit();
+        panelGrid.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)gridFlight).EndInit();
         ResumeLayout(false);
         PerformLayout();
     }
 
     private Label lblTitle;
-    private GroupBox gbSearch;
-    private Label lblKode;
-    private ComboBox cmbTujuan;
-    private Label lblTujuan;
-    private ComboBox cmbKeberangkatan;
-    private Label lblKeberangkatan;
-    private TextBox txtKodePenerbangan;
-    private DateTimePicker dtpTanggal;
-    private Label lblTanggal;
-    private ComboBox cmbMaskapai;
-    private Label lblMaskapai;
-    private Button btnReset;
+    private Panel panelSearch;
+    private ComboBox cmbBandaraAsal;
+    private Label lblBandaraAsal;
+    private ComboBox cmbBandaraTujuan;
+    private Label lblBandaraTujuan;
+    private DateTimePicker dtpTanggalBerangkat;
+    private Label lblTanggalBerangkat;
+    private NumericUpDown numJumlahPenumpang;
+    private Label lblJumlahPenumpang;
     private Button btnSearch;
+    private Button btnReset;
     private Label lblHasil;
-    private Panel panel1;
-    private DataGridView dgvFlight;
-    private DataGridViewTextBoxColumn colID;
-    private DataGridViewTextBoxColumn colKode;
-    private DataGridViewTextBoxColumn colAsal;
-    private DataGridViewTextBoxColumn colTujuan;
+    private Panel panelGrid;
+    private Button btnDetail;
+    private DataGridView gridFlight;
+    private DataGridViewTextBoxColumn colKodePenerbangan;
     private DataGridViewTextBoxColumn colMaskapai;
-    private DataGridViewTextBoxColumn colJadwal;
+    private DataGridViewTextBoxColumn colBandaraAsal;
+    private DataGridViewTextBoxColumn colBandaraTujuan;
+    private DataGridViewTextBoxColumn colTanggalBerangkat;
+    private DataGridViewTextBoxColumn colWaktuBerangkat;
     private DataGridViewTextBoxColumn colDurasi;
     private DataGridViewTextBoxColumn colHarga;
+    private DataGridViewTextBoxColumn colKursiTersedia;
 }
