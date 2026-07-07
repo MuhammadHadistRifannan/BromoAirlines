@@ -14,3 +14,7 @@ build_verify/
 
 # NuGet
 packages/
+
+
+*.md 
+*.MD
