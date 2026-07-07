@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,30 +13,63 @@ namespace BromoAirlines.Forms.Sidebar
         public DashboardForm()
         {
             InitializeComponent();
+            this.Load += DashboardForm_Load;
+        }
+
+        private void DashboardForm_Load(object? sender, EventArgs e)
+        {
+            ChangePanel(new AdminDashboardForm());
         }
 
         void ChangePanel(Form form)
         {
-            sidebarPanel.Controls.Clear();
+            panelContent.Controls.Clear();
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
-            sidebarPanel.AutoScroll = false;
-            sidebarPanel.Controls.Add(form);
+            panelContent.AutoScroll = false;
+            panelContent.Controls.Add(form);
             form.Dock = DockStyle.Fill;
             form.Show();
         }
 
-        private void MenuPenerbanganClick(object sender, EventArgs e)
-        {
-            ChangePanel(new SearchFlightForm());
-        }
-
         private void MenuDashboardClick(object sender, EventArgs e)
         {
+            ChangePanel(new AdminDashboardForm());
         }
 
         private void MenuBandaraClick(object sender, EventArgs e)
         {
+            ChangePanel(new MasterBandaraForm());
+        }
+
+        private void MenuMaskapaiClick(object sender, EventArgs e)
+        {
+            ChangePanel(new MasterMaskapaiForm());
+        }
+
+        private void MenuJadwalPenerbanganClick(object sender, EventArgs e)
+        {
+            ChangePanel(new MasterJadwalPenerbanganForm());
+        }
+
+        private void MenuKodePromoClick(object sender, EventArgs e)
+        {
+            ChangePanel(new MasterKodePromoForm());
+        }
+
+        private void MenuStatusPenerbanganClick(object sender, EventArgs e)
+        {
+            ChangePanel(new StatusPenerbanganForm());
+        }
+
+        private void MenuProfileClick(object sender, EventArgs e)
+        {
+            ChangePanel(new FormProfileAdmin());
+        }
+
+        private void MenuLogoutClick(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
