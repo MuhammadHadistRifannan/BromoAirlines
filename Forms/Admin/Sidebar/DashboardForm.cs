@@ -5,13 +5,43 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using BromoAirlines.Repositories;
+using BromoAirlines.Services;
 
 namespace BromoAirlines.Forms.Sidebar
 {
     public partial class DashboardForm : Form
     {
+        private readonly MasterBandaraService _masterBandaraService;
+        private readonly MasterMaskapaiService _masterMaskapaiService;
+        private readonly MasterJadwalPenerbanganService _masterJadwalPenerbanganService;
+        private readonly MasterKodePromoService _masterKodePromoService;
+        private readonly StatusPenerbanganService _statusPenerbanganService;
+        private readonly TransaksiService _transaksiService;
+        private readonly UserManagementService _userManagementService;
+        private readonly LaporanService _laporanService;
+
         public DashboardForm()
         {
+            var bandaraRepository = new BandaraRepository();
+            var maskapaiRepository = new MaskapaiRepository();
+
+            _masterBandaraService = new MasterBandaraService(
+                bandaraRepository,
+                new NegaraRepository());
+            _masterMaskapaiService = new MasterMaskapaiService(maskapaiRepository);
+            _masterJadwalPenerbanganService = new MasterJadwalPenerbanganService(
+                new JadwalPenerbanganRepository(),
+                bandaraRepository,
+                maskapaiRepository);
+            _masterKodePromoService = new MasterKodePromoService(new KodePromoRepository());
+            _statusPenerbanganService = new StatusPenerbanganService(
+                new PerubahanStatusJadwalPenerbanganRepository(),
+                new StatusPenerbanganRepository());
+            _transaksiService = new TransaksiService(new TransaksiRepository());
+            _userManagementService = new UserManagementService(new AkunRepository());
+            _laporanService = new LaporanService(new LaporanRepository());
+
             InitializeComponent();
             this.Load += DashboardForm_Load;
         }
@@ -39,27 +69,42 @@ namespace BromoAirlines.Forms.Sidebar
 
         private void MenuBandaraClick(object sender, EventArgs e)
         {
-            ChangePanel(new MasterBandaraForm());
+            ChangePanel(new MasterBandaraForm(_masterBandaraService));
         }
 
         private void MenuMaskapaiClick(object sender, EventArgs e)
         {
-            ChangePanel(new MasterMaskapaiForm());
+            ChangePanel(new MasterMaskapaiForm(_masterMaskapaiService));
         }
 
         private void MenuJadwalPenerbanganClick(object sender, EventArgs e)
         {
-            ChangePanel(new MasterJadwalPenerbanganForm());
+            ChangePanel(new MasterJadwalPenerbanganForm(_masterJadwalPenerbanganService));
         }
 
         private void MenuKodePromoClick(object sender, EventArgs e)
         {
-            ChangePanel(new MasterKodePromoForm());
+            ChangePanel(new MasterKodePromoForm(_masterKodePromoService));
         }
 
         private void MenuStatusPenerbanganClick(object sender, EventArgs e)
         {
-            ChangePanel(new StatusPenerbanganForm());
+            ChangePanel(new StatusPenerbanganForm(_statusPenerbanganService));
+        }
+
+        private void MenuTransaksiClick(object sender, EventArgs e)
+        {
+            ChangePanel(new TransaksiForm(_transaksiService));
+        }
+
+        private void MenuUserManagementClick(object sender, EventArgs e)
+        {
+            ChangePanel(new UserManagementForm(_userManagementService));
+        }
+
+        private void MenuLaporanClick(object sender, EventArgs e)
+        {
+            ChangePanel(new LaporanForm(_laporanService));
         }
 
         private void MenuProfileClick(object sender, EventArgs e)

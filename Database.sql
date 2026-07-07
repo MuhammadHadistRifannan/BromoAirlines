@@ -1,10 +1,9 @@
-CREATE DATABASE [BromoAirlines]
- 
-
+CREATE DATABASE BromoAirlines;
 USE `BromoAirlines`;
  
 
--- Ta... SQLINES DEMO ***
+-- SQLINES DEMO *** O ***
+-- SQLINES DEMO *** ATION USE ONLY (14 DAYS)
 -- SQLINES FOR EVALUATION USE ONLY (14 DAYS)
 CREATE TABLE `Akun`
 (
@@ -14,10 +13,10 @@ CREATE TABLE `Akun`
 	`Nama`							VARCHAR(200)	NOT NULL,
 	`TanggalLahir`					DATE			NOT NULL,
 	`NomorTelepon`					VARCHAR(20)		NOT NULL,
-	`MerupakanAdmin`				TINYINT				NOT NULL
+	`MerupakanAdmin`				TINYINT UNSIGNED				NOT NULL
 );
 
--- Ta... SQLINES DEMO ***
+-- SQLINES DEMO *** O ***
 CREATE TABLE `Negara`
 (
 	`ID`				INT				PRIMARY KEY		AUTO_INCREMENT,
@@ -25,7 +24,7 @@ CREATE TABLE `Negara`
 	`IbukotaNegara`		VARCHAR(200)	NOT NULL
 );
 
--- Ta... SQLINES DEMO ***
+-- SQLINES DEMO *** O ***
 CREATE TABLE `Bandara`
 (
 	`ID`							INT				PRIMARY KEY		AUTO_INCREMENT,
@@ -39,7 +38,7 @@ CREATE TABLE `Bandara`
 	CONSTRAINT FK_NegaraID_Bandara_Negara FOREIGN KEY (`NegaraID`) REFERENCES `Negara`(`ID`)
 );
 
--- Ta... SQLINES DEMO ***
+-- SQLINES DEMO *** O ***
 CREATE TABLE `Maskapai`
 (
 	`ID`							INT				PRIMARY KEY		AUTO_INCREMENT,
@@ -66,7 +65,7 @@ CREATE TABLE `JadwalPenerbangan`
 	CONSTRAINT FK_MaskapaiID_JadwalPenerbangan_Maskapai FOREIGN KEY (`MaskapaiID`) REFERENCES `Maskapai`(`ID`)
 );
 
--- Ta... SQLINES DEMO ***
+-- SQLINES DEMO *** O ***
 CREATE TABLE `KodePromo`
 (
 	`ID`							INT				PRIMARY KEY		AUTO_INCREMENT,
@@ -93,8 +92,8 @@ CREATE TABLE `PerubahanStatusJadwalPenerbangan`
 	`WaktuPerubahanTerjadi`			DATETIME(3)		NOT NULL,
 	`PerkiraanDurasiDelay`			INT				NULL,
 
-	CONSTRAINT FK_JadwalPenerbanganID_PerubahanStatusJadwalPenerbangan_JadwalPenerbangan FOREIGN KEY (`JadwalPenerbanganID`) REFERENCES `JadwalPenerbangan`(`ID`),
-	CONSTRAINT FK_StatusPenerbanganID_PerubahanStatusJadwalPenerbangan_StatusPenerbangan FOREIGN KEY (`StatusPenerbanganID`) REFERENCES `StatusPenerbangan`(`ID`)
+	CONSTRAINT FK_JadwalPenerbanganID_PerubahanStatusJadwalPenerbangan_Jadwal FOREIGN KEY (`JadwalPenerbanganID`) REFERENCES `JadwalPenerbangan`(`ID`),
+	CONSTRAINT FK_StatusPenerbanganID_PerubahanStatusJadwalPenerbangan FOREIGN KEY (`StatusPenerbanganID`) REFERENCES `StatusPenerbangan`(`ID`)
 );
 
 -- SQLINES DEMO *** eader
@@ -109,7 +108,7 @@ CREATE TABLE `TransaksiHeader`
 	`KodePromoID`					INT				NULL,
 
 	CONSTRAINT FK_AkunID_TransaksiHeader_Akun FOREIGN KEY (`AkunID`) REFERENCES `Akun`(`ID`),
-	CONSTRAINT FK_JadwalPenerbanganID_TransaksiHeader_JadwalPenerbangan FOREIGN KEY (`JadwalPenerbanganID`) REFERENCES `JadwalPenerbangan`(`ID`),
+	CONSTRAINT FK_JadwalPenerbanganID_TransaksiHeader_Jadwal FOREIGN KEY (`JadwalPenerbanganID`) REFERENCES `JadwalPenerbangan`(`ID`),
 	CONSTRAINT FK_KodePromoID_TransaksiHeader_KodePromo FOREIGN KEY (`KodePromoID`) REFERENCES `KodePromo`(`ID`)
 );
 
@@ -128,7 +127,7 @@ CREATE TABLE `TransaksiDetail`
 
 
 
--- In... SQLINES DEMO ***
+-- SQLINES DEMO *** O ***
 INSERT INTO `Akun` (`Username`, `Password`, `Nama`, `TanggalLahir`, `NomorTelepon`, `MerupakanAdmin`) VALUES ('admin', 'admin123', 'Gavriel', '2003-12-18', '081347923851', 1);
 INSERT INTO `Akun` (`Username`, `Password`, `Nama`, `TanggalLahir`, `NomorTelepon`, `MerupakanAdmin`) VALUES ('edally0', 'mzTUku', 'Eulalie Dally', '2001-11-16', '7035740962', 0);
 INSERT INTO `Akun` (`Username`, `Password`, `Nama`, `TanggalLahir`, `NomorTelepon`, `MerupakanAdmin`) VALUES ('abumpus1', 'HV7H7f7s1H09', 'Antoine Bumpus', '2002-12-18', '8372424609', 0);

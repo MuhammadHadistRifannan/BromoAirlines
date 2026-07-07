@@ -2,6 +2,7 @@
 .vs/
 bin/
 obj/
+build_verify/
 
 # User-specific files
 *.user

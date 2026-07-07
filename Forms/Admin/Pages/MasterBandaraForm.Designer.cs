@@ -144,7 +144,6 @@ partial class MasterBandaraForm
         txtAlamat.Name = "txtAlamat";
         txtAlamat.Size = new Size(320, 100);
         txtAlamat.TabIndex = 11;
-        txtAlamat.TextChanged += txtAlamat_TextChanged;
         // 
         // lblAlamat
         // 
@@ -154,7 +153,6 @@ partial class MasterBandaraForm
         lblAlamat.Size = new Size(77, 25);
         lblAlamat.TabIndex = 10;
         lblAlamat.Text = "Alamat :";
-        lblAlamat.Click += lblAlamat_Click;
         // 
         // numTerminal
         // 
@@ -197,7 +195,7 @@ partial class MasterBandaraForm
         // 
         txtKota.BorderStyle = BorderStyle.FixedSingle;
         txtKota.Location = new Point(220, 145);
-        txtKota.MaxLength = 3;
+        txtKota.MaxLength = 200;
         txtKota.Name = "txtKota";
         txtKota.Size = new Size(350, 31);
         txtKota.TabIndex = 5;
@@ -265,7 +263,6 @@ partial class MasterBandaraForm
         txtCariBandara.PlaceholderText = "Cari Bandara.....";
         txtCariBandara.Size = new Size(250, 31);
         txtCariBandara.TabIndex = 17;
-        txtCariBandara.TextChanged += txtCariBandara_TextChanged;
         // 
         // dgvBandara
         // 

@@ -5,6 +5,87 @@ namespace BromoAirlines.Repositories;
 
 public sealed class AkunRepository
 {
+    public async Task<List<Akun>> SearchAsync(string keyword)
+    {
+        var akun = new List<Akun>();
+        using var connection = Database.CreateConnection();
+        using var command = CreateSearchCommand(connection, keyword);
+
+        await connection.OpenAsync();
+        using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            akun.Add(MapAkun(reader));
+        }
+
+        return akun;
+    }
+
+    public async Task InsertAsync(Akun akun)
+    {
+        using var connection = Database.CreateConnection();
+        using var command = new MySqlCommand(
+            """
+            INSERT INTO Akun (Username, Password, Nama, TanggalLahir, NomorTelepon, MerupakanAdmin)
+            VALUES (@Username, @Password, @Nama, @TanggalLahir, @NomorTelepon, @MerupakanAdmin)
+            """,
+            connection);
+
+        AddAkunParameters(command, akun);
+        await connection.OpenAsync();
+        await command.ExecuteNonQueryAsync();
+    }
+
+    public async Task UpdateAsync(Akun akun)
+    {
+        using var connection = Database.CreateConnection();
+        using var command = new MySqlCommand(
+            """
+            UPDATE Akun
+            SET Username = @Username,
+                Password = @Password,
+                Nama = @Nama,
+                TanggalLahir = @TanggalLahir,
+                NomorTelepon = @NomorTelepon,
+                MerupakanAdmin = @MerupakanAdmin
+            WHERE ID = @ID
+            """,
+            connection);
+
+        AddAkunParameters(command, akun);
+        command.Parameters.AddWithValue("@ID", akun.ID);
+        await connection.OpenAsync();
+        await command.ExecuteNonQueryAsync();
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        using var connection = Database.CreateConnection();
+        using var command = new MySqlCommand("DELETE FROM Akun WHERE ID = @ID", connection);
+
+        command.Parameters.AddWithValue("@ID", id);
+        await connection.OpenAsync();
+        await command.ExecuteNonQueryAsync();
+    }
+
+    public async Task<bool> IsUsernameExistsAsync(string username, int ignoredId)
+    {
+        using var connection = Database.CreateConnection();
+        using var command = new MySqlCommand(
+            """
+            SELECT COUNT(1)
+            FROM Akun
+            WHERE UPPER(Username) = UPPER(@Username) AND ID <> @IgnoredID
+            """,
+            connection);
+
+        command.Parameters.AddWithValue("@Username", username);
+        command.Parameters.AddWithValue("@IgnoredID", ignoredId);
+        await connection.OpenAsync();
+        var count = Convert.ToInt32(await command.ExecuteScalarAsync());
+        return count > 0;
+    }
+
     public Akun? FindByUsernameAndPassword(string username, string password)
     {
         using var connection = Database.CreateConnection();
@@ -27,6 +108,30 @@ public sealed class AkunRepository
             return null;
         }
 
+        return MapAkun(reader);
+    }
+
+    private static MySqlCommand CreateSearchCommand(MySqlConnection connection, string keyword)
+    {
+        var command = new MySqlCommand(
+            """
+            SELECT ID, Username, Password, Nama, TanggalLahir, NomorTelepon, MerupakanAdmin
+            FROM Akun
+            WHERE @Keyword = ''
+               OR Username LIKE @Search
+               OR Nama LIKE @Search
+               OR NomorTelepon LIKE @Search
+            ORDER BY Nama
+            """,
+            connection);
+
+        command.Parameters.AddWithValue("@Keyword", keyword.Trim());
+        command.Parameters.AddWithValue("@Search", $"%{keyword.Trim()}%");
+        return command;
+    }
+
+    private static Akun MapAkun(System.Data.Common.DbDataReader reader)
+    {
         return new Akun
         {
             ID = reader.GetInt32(0),
@@ -37,5 +142,15 @@ public sealed class AkunRepository
             NomorTelepon = reader.GetString(5),
             MerupakanAdmin = reader.GetBoolean(6)
         };
+    }
+
+    private static void AddAkunParameters(MySqlCommand command, Akun akun)
+    {
+        command.Parameters.AddWithValue("@Username", akun.Username);
+        command.Parameters.AddWithValue("@Password", akun.Password);
+        command.Parameters.AddWithValue("@Nama", akun.Nama);
+        command.Parameters.AddWithValue("@TanggalLahir", akun.TanggalLahir.Date);
+        command.Parameters.AddWithValue("@NomorTelepon", akun.NomorTelepon);
+        command.Parameters.AddWithValue("@MerupakanAdmin", akun.MerupakanAdmin);
     }
 }

@@ -42,6 +42,9 @@ namespace BromoAirlines.Forms.Sidebar
             btnMasterMaskapai = new Button();
             btnMasterKodePromo = new Button();
             btnStatusPenerbangan = new Button();
+            btnTransaksi = new Button();
+            btnUserManagement = new Button();
+            btnLaporan = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -172,7 +175,7 @@ namespace BromoAirlines.Forms.Sidebar
             btnProfile.FlatStyle = FlatStyle.Flat;
             btnProfile.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnProfile.ForeColor = Color.White;
-            btnProfile.Location = new Point(46, 745);
+            btnProfile.Location = new Point(46, 904);
             btnProfile.Name = "btnProfile";
             btnProfile.Size = new Size(273, 45);
             btnProfile.TabIndex = 7;
@@ -190,7 +193,7 @@ namespace BromoAirlines.Forms.Sidebar
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(46, 798);
+            btnLogout.Location = new Point(46, 957);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(273, 45);
             btnLogout.TabIndex = 8;
@@ -235,11 +238,65 @@ namespace BromoAirlines.Forms.Sidebar
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(54, 715);
+            label2.Location = new Point(54, 874);
             label2.Name = "label2";
             label2.Size = new Size(60, 28);
             label2.TabIndex = 12;
             label2.Text = "Akun";
+            // 
+            // btnTransaksi
+            // 
+            btnTransaksi.BackColor = Color.RoyalBlue;
+            btnTransaksi.Cursor = Cursors.Hand;
+            btnTransaksi.FlatAppearance.BorderColor = Color.White;
+            btnTransaksi.FlatAppearance.BorderSize = 0;
+            btnTransaksi.FlatStyle = FlatStyle.Flat;
+            btnTransaksi.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnTransaksi.ForeColor = Color.White;
+            btnTransaksi.Location = new Point(46, 698);
+            btnTransaksi.Name = "btnTransaksi";
+            btnTransaksi.Size = new Size(273, 45);
+            btnTransaksi.TabIndex = 13;
+            btnTransaksi.Text = "Transaksi";
+            btnTransaksi.TextAlign = ContentAlignment.MiddleLeft;
+            btnTransaksi.UseVisualStyleBackColor = false;
+            btnTransaksi.Click += MenuTransaksiClick;
+            // 
+            // btnUserManagement
+            // 
+            btnUserManagement.BackColor = Color.RoyalBlue;
+            btnUserManagement.Cursor = Cursors.Hand;
+            btnUserManagement.FlatAppearance.BorderColor = Color.White;
+            btnUserManagement.FlatAppearance.BorderSize = 0;
+            btnUserManagement.FlatStyle = FlatStyle.Flat;
+            btnUserManagement.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnUserManagement.ForeColor = Color.White;
+            btnUserManagement.Location = new Point(46, 751);
+            btnUserManagement.Name = "btnUserManagement";
+            btnUserManagement.Size = new Size(273, 45);
+            btnUserManagement.TabIndex = 14;
+            btnUserManagement.Text = "User Management";
+            btnUserManagement.TextAlign = ContentAlignment.MiddleLeft;
+            btnUserManagement.UseVisualStyleBackColor = false;
+            btnUserManagement.Click += MenuUserManagementClick;
+            // 
+            // btnLaporan
+            // 
+            btnLaporan.BackColor = Color.RoyalBlue;
+            btnLaporan.Cursor = Cursors.Hand;
+            btnLaporan.FlatAppearance.BorderColor = Color.White;
+            btnLaporan.FlatAppearance.BorderSize = 0;
+            btnLaporan.FlatStyle = FlatStyle.Flat;
+            btnLaporan.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnLaporan.ForeColor = Color.White;
+            btnLaporan.Location = new Point(46, 804);
+            btnLaporan.Name = "btnLaporan";
+            btnLaporan.Size = new Size(273, 45);
+            btnLaporan.TabIndex = 15;
+            btnLaporan.Text = "Laporan";
+            btnLaporan.TextAlign = ContentAlignment.MiddleLeft;
+            btnLaporan.UseVisualStyleBackColor = false;
+            btnLaporan.Click += MenuLaporanClick;
             // 
             // DashboardForm
             // 
@@ -248,6 +305,9 @@ namespace BromoAirlines.Forms.Sidebar
             AutoScroll = true;
             BackColor = Color.RoyalBlue;
             ClientSize = new Size(1695, 1050);
+            Controls.Add(btnLaporan);
+            Controls.Add(btnUserManagement);
+            Controls.Add(btnTransaksi);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnLogout);
@@ -281,6 +341,9 @@ namespace BromoAirlines.Forms.Sidebar
         private Button btnMasterJadwalPenerbangan;
         private Button btnMasterKodePromo;
         private Button btnStatusPenerbangan;
+        private Button btnTransaksi;
+        private Button btnUserManagement;
+        private Button btnLaporan;
         private Button btnProfile;
         private Button btnLogout;
         private PictureBox pictureBox1;
