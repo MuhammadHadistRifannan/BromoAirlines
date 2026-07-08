@@ -105,6 +105,7 @@ public sealed class UserTransactionService
             TanggalTransaksi = DateTime.Now,
             JadwalPenerbanganID = context.Flight.ID,
             JumlahPenumpang = context.JumlahPenumpang,
+            MaskapaiID = context.Flight.MaskapaiID,
             TotalHarga = CalculateTotal(context),
             KodePromoID = context.Promo?.ID
         };

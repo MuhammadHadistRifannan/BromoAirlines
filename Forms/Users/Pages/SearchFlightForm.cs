@@ -27,7 +27,9 @@ public partial class SearchFlightForm : Form
     {
         cmbBandaraAsal.SelectedIndex = -1;
         cmbBandaraTujuan.SelectedIndex = -1;
+        cmbMaskapai.SelectedIndex = -1;
         dtpTanggalBerangkat.Value = DateTime.Today;
+        chkFilterTanggal.Checked = false;
         numJumlahPenumpang.Value = 1;
         await LoadTopFlightsAsync();
     }
@@ -57,6 +59,7 @@ public partial class SearchFlightForm : Form
             var bandara = await _searchFlightService.GetBandaraAsync();
             BindBandara(cmbBandaraAsal, bandara);
             BindBandara(cmbBandaraTujuan, bandara);
+            BindMaskapai(cmbMaskapai, await _searchFlightService.GetMaskapaiAsync());
         }
         catch
         {
@@ -89,7 +92,9 @@ public partial class SearchFlightForm : Form
                 GetSelectedBandaraId(cmbBandaraAsal),
                 GetSelectedBandaraId(cmbBandaraTujuan),
                 dtpTanggalBerangkat.Value,
-                (int)numJumlahPenumpang.Value);
+                (int)numJumlahPenumpang.Value,
+                GetSelectedMaskapaiId(),
+                chkFilterTanggal.Checked);
 
             if (!result.IsSuccess)
             {
@@ -111,6 +116,17 @@ public partial class SearchFlightForm : Form
         comboBox.DisplayMember = nameof(BandaraView.Nama);
         comboBox.ValueMember = nameof(BandaraView.ID);
         comboBox.DataSource = bandara.ToList();
+        comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+        comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+        comboBox.SelectedIndex = -1;
+    }
+
+    private static void BindMaskapai(ComboBox comboBox, List<Maskapai> maskapai)
+    {
+        comboBox.DataSource = null;
+        comboBox.DisplayMember = nameof(Maskapai.Nama);
+        comboBox.ValueMember = nameof(Maskapai.ID);
+        comboBox.DataSource = maskapai;
         comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
         comboBox.SelectedIndex = -1;
@@ -145,14 +161,27 @@ public partial class SearchFlightForm : Form
             return;
         }
 
-        FlightDetailRequested?.Invoke(
-            this,
-            new FlightSelectedEventArgs(_currentFlights[gridFlight.CurrentRow.Index]));
+        var flight = _currentFlights[gridFlight.CurrentRow.Index];
+        FlightDetailRequested?.Invoke(this, new FlightSelectedEventArgs(flight, CreateMaskapaiFromFlight(flight)));
+    }
+
+    private static Maskapai CreateMaskapaiFromFlight(JadwalPenerbanganView flight)
+    {
+        return new Maskapai
+        {
+            ID = flight.MaskapaiID,
+            Nama = flight.Maskapai
+        };
     }
 
     private static int GetSelectedBandaraId(ComboBox comboBox)
     {
         return comboBox.SelectedValue is int id ? id : 0;
+    }
+
+    private int GetSelectedMaskapaiId()
+    {
+        return cmbMaskapai.SelectedValue is int id ? id : 0;
     }
 
     private static void ShowFriendlyMessage(string message)

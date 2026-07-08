@@ -7,18 +7,26 @@ public sealed class UserSearchFlightService
 {
     private readonly BandaraRepository _bandaraRepository;
     private readonly JadwalPenerbanganRepository _jadwalRepository;
+    private readonly MaskapaiRepository _maskapaiRepository;
 
     public UserSearchFlightService(
         BandaraRepository bandaraRepository,
-        JadwalPenerbanganRepository jadwalRepository)
+        JadwalPenerbanganRepository jadwalRepository,
+        MaskapaiRepository maskapaiRepository)
     {
         _bandaraRepository = bandaraRepository;
         _jadwalRepository = jadwalRepository;
+        _maskapaiRepository = maskapaiRepository;
     }
 
     public async Task<List<BandaraView>> GetBandaraAsync()
     {
         return await _bandaraRepository.GetAllAsync();
+    }
+
+    public async Task<List<Maskapai>> GetMaskapaiAsync()
+    {
+        return await _maskapaiRepository.GetAllAsync();
     }
 
     public async Task<List<JadwalPenerbanganView>> GetTopFlightsAsync(int limit)
@@ -30,13 +38,16 @@ public sealed class UserSearchFlightService
         int bandaraAsalId,
         int bandaraTujuanId,
         DateTime tanggalBerangkat,
-        int jumlahPenumpang)
+        int jumlahPenumpang,
+        int maskapaiId,
+        bool useTanggal)
     {
         var validation = ValidateSearch(
             bandaraAsalId,
             bandaraTujuanId,
             tanggalBerangkat,
-            jumlahPenumpang);
+            jumlahPenumpang,
+            useTanggal);
 
         if (!validation.IsSuccess)
         {
@@ -46,7 +57,9 @@ public sealed class UserSearchFlightService
         var jadwal = await _jadwalRepository.SearchForUserAsync(
             bandaraAsalId,
             bandaraTujuanId,
-            tanggalBerangkat);
+            tanggalBerangkat,
+            maskapaiId,
+            useTanggal);
 
         return UserSearchFlightServiceResult.Success(jadwal);
     }
@@ -55,19 +68,15 @@ public sealed class UserSearchFlightService
         int bandaraAsalId,
         int bandaraTujuanId,
         DateTime tanggalBerangkat,
-        int jumlahPenumpang)
+        int jumlahPenumpang,
+        bool useTanggal)
     {
-        if (bandaraAsalId <= 0 || bandaraTujuanId <= 0)
-        {
-            return UserSearchFlightServiceResult.Failed("Bandara asal dan tujuan wajib dipilih.");
-        }
-
-        if (bandaraAsalId == bandaraTujuanId)
+        if (bandaraAsalId > 0 && bandaraTujuanId > 0 && bandaraAsalId == bandaraTujuanId)
         {
             return UserSearchFlightServiceResult.Failed("Bandara asal dan tujuan harus berbeda.");
         }
 
-        if (tanggalBerangkat.Date < DateTime.Today)
+        if (useTanggal && tanggalBerangkat.Date < DateTime.Today)
         {
             return UserSearchFlightServiceResult.Failed("Tanggal berangkat tidak boleh kurang dari hari ini.");
         }

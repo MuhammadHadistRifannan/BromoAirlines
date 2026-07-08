@@ -1,7 +1,9 @@
 using BromoAirlines.Forms;
+using BromoAirlines.Forms.AirlineAdmin.Sidebar;
 using BromoAirlines.Forms.Sidebar;
 using BromoAirlines.Forms.Users.Sidebar;
 using BromoAirlines.Models;
+using BromoAirlines.Repositories;
 
 namespace BromoAirlines;
 
@@ -20,6 +22,7 @@ static class Program
         private LoginForm? _loginForm;
         private RegisterForm? _registerForm;
         private Form? _dashboardForm;
+        private readonly AdminMaskapaiRepository _adminMaskapaiRepository = new();
         private bool _isSwitchingForms;
 
         public AuthApplicationContext()
@@ -59,13 +62,46 @@ static class Program
         private void ShowDashboard(Akun akun)
         {
             _isSwitchingForms = true;
-            _dashboardForm = akun.MerupakanAdmin
-                ? new DashboardForm()
-                : new DashboardUserForm(akun);
+            try
+            {
+                _dashboardForm = CreateDashboard(akun);
+            }
+            catch
+            {
+                _isSwitchingForms = false;
+                ShowLogin("Login admin maskapai belum dapat diproses. Periksa data mapping admin maskapai.");
+                return;
+            }
+
+            if (_dashboardForm is null)
+            {
+                _isSwitchingForms = false;
+                ShowLogin("Akun admin maskapai belum terhubung dengan data maskapai.");
+                return;
+            }
+
             _dashboardForm.FormClosed += DashboardFormClosed;
             CloseLoginForm();
             _dashboardForm.Show();
             _isSwitchingForms = false;
+        }
+
+        private Form? CreateDashboard(Akun akun)
+        {
+            if (akun.IsAdminMaster)
+            {
+                return new DashboardForm();
+            }
+
+            if (akun.IsAdminMaskapai)
+            {
+                var mapping = _adminMaskapaiRepository.FindByUserId(akun.ID);
+                return mapping is null
+                    ? null
+                    : new DashboardMaskapaiForm(akun, mapping.MaskapaiID);
+            }
+
+            return new DashboardUserForm(akun);
         }
 
         private void LoginSucceeded(object? sender, Akun akun)

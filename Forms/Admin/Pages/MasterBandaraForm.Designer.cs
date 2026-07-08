@@ -46,7 +46,7 @@ partial class MasterBandaraForm
         lblTitle.ForeColor = Color.Navy;
         lblTitle.Location = new Point(90, 20);
         lblTitle.Name = "lblTitle";
-        lblTitle.Size = new Size(578, 46);
+        lblTitle.Size = new Size(498, 39);
         lblTitle.TabIndex = 0;
         lblTitle.Text = "MASTER BANDARA - ADMIN";
         // 
@@ -150,7 +150,7 @@ partial class MasterBandaraForm
         lblAlamat.AutoSize = true;
         lblAlamat.Location = new Point(630, 50);
         lblAlamat.Name = "lblAlamat";
-        lblAlamat.Size = new Size(77, 25);
+        lblAlamat.Size = new Size(64, 20);
         lblAlamat.TabIndex = 10;
         lblAlamat.Text = "Alamat :";
         // 
@@ -160,7 +160,7 @@ partial class MasterBandaraForm
         numTerminal.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
         numTerminal.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
         numTerminal.Name = "numTerminal";
-        numTerminal.Size = new Size(120, 31);
+        numTerminal.Size = new Size(120, 27);
         numTerminal.TabIndex = 9;
         numTerminal.Value = new decimal(new int[] { 1, 0, 0, 0 });
         // 
@@ -169,7 +169,7 @@ partial class MasterBandaraForm
         lblTerminal.AutoSize = true;
         lblTerminal.Location = new Point(31, 243);
         lblTerminal.Name = "lblTerminal";
-        lblTerminal.Size = new Size(146, 25);
+        lblTerminal.Size = new Size(123, 20);
         lblTerminal.TabIndex = 8;
         lblTerminal.Text = "Jumlah Terminal :";
         // 
@@ -179,7 +179,7 @@ partial class MasterBandaraForm
         cmbNegara.FormattingEnabled = true;
         cmbNegara.Location = new Point(220, 195);
         cmbNegara.Name = "cmbNegara";
-        cmbNegara.Size = new Size(350, 33);
+        cmbNegara.Size = new Size(350, 28);
         cmbNegara.TabIndex = 7;
         // 
         // lblNegara
@@ -187,7 +187,7 @@ partial class MasterBandaraForm
         lblNegara.AutoSize = true;
         lblNegara.Location = new Point(31, 191);
         lblNegara.Name = "lblNegara";
-        lblNegara.Size = new Size(78, 25);
+        lblNegara.Size = new Size(65, 20);
         lblNegara.TabIndex = 6;
         lblNegara.Text = "Negara :";
         // 
@@ -197,7 +197,7 @@ partial class MasterBandaraForm
         txtKota.Location = new Point(220, 145);
         txtKota.MaxLength = 200;
         txtKota.Name = "txtKota";
-        txtKota.Size = new Size(350, 31);
+        txtKota.Size = new Size(350, 27);
         txtKota.TabIndex = 5;
         // 
         // lblKota
@@ -205,7 +205,7 @@ partial class MasterBandaraForm
         lblKota.AutoSize = true;
         lblKota.Location = new Point(31, 143);
         lblKota.Name = "lblKota";
-        lblKota.Size = new Size(62, 25);
+        lblKota.Size = new Size(51, 20);
         lblKota.TabIndex = 4;
         lblKota.Text = "Kota : ";
         // 
@@ -215,7 +215,7 @@ partial class MasterBandaraForm
         txtKodeIATA.Location = new Point(220, 95);
         txtKodeIATA.MaxLength = 3;
         txtKodeIATA.Name = "txtKodeIATA";
-        txtKodeIATA.Size = new Size(100, 31);
+        txtKodeIATA.Size = new Size(100, 27);
         txtKodeIATA.TabIndex = 3;
         // 
         // lblKodeIATA
@@ -223,7 +223,7 @@ partial class MasterBandaraForm
         lblKodeIATA.AutoSize = true;
         lblKodeIATA.Location = new Point(30, 95);
         lblKodeIATA.Name = "lblKodeIATA";
-        lblKodeIATA.Size = new Size(103, 25);
+        lblKodeIATA.Size = new Size(85, 20);
         lblKodeIATA.TabIndex = 2;
         lblKodeIATA.Text = "Kode IATA :";
         // 
@@ -232,7 +232,7 @@ partial class MasterBandaraForm
         txtNamaBandara.BorderStyle = BorderStyle.FixedSingle;
         txtNamaBandara.Location = new Point(220, 45);
         txtNamaBandara.Name = "txtNamaBandara";
-        txtNamaBandara.Size = new Size(350, 31);
+        txtNamaBandara.Size = new Size(350, 27);
         txtNamaBandara.TabIndex = 1;
         // 
         // lblNamaBandara
@@ -240,7 +240,7 @@ partial class MasterBandaraForm
         lblNamaBandara.AutoSize = true;
         lblNamaBandara.Location = new Point(30, 50);
         lblNamaBandara.Name = "lblNamaBandara";
-        lblNamaBandara.Size = new Size(137, 25);
+        lblNamaBandara.Size = new Size(115, 20);
         lblNamaBandara.TabIndex = 0;
         lblNamaBandara.Text = "Nama Bandara :";
         // 
@@ -251,7 +251,7 @@ partial class MasterBandaraForm
         lblDaftarBandara.ForeColor = Color.Navy;
         lblDaftarBandara.Location = new Point(20, 390);
         lblDaftarBandara.Name = "lblDaftarBandara";
-        lblDaftarBandara.Size = new Size(186, 29);
+        lblDaftarBandara.Size = new Size(157, 25);
         lblDaftarBandara.TabIndex = 16;
         lblDaftarBandara.Text = "Daftar Bandara";
         // 
@@ -261,7 +261,7 @@ partial class MasterBandaraForm
         txtCariBandara.Location = new Point(910, 385);
         txtCariBandara.Name = "txtCariBandara";
         txtCariBandara.PlaceholderText = "Cari Bandara.....";
-        txtCariBandara.Size = new Size(250, 31);
+        txtCariBandara.Size = new Size(250, 27);
         txtCariBandara.TabIndex = 17;
         // 
         // dgvBandara
@@ -332,6 +332,7 @@ partial class MasterBandaraForm
         // 
         // MasterBandaraForm
         // 
+        AutoScaleMode = AutoScaleMode.Inherit;
         AutoScroll = true;
         BackColor = Color.WhiteSmoke;
         ClientSize = new Size(1182, 715);

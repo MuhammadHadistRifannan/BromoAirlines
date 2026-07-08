@@ -9,5 +9,9 @@ public sealed class Akun
     public string Email { get; set; } = string.Empty;
     public DateTime TanggalLahir { get; set; }
     public string NomorTelepon { get; set; } = string.Empty;
-    public bool MerupakanAdmin { get; set; }
+    public int MerupakanAdmin { get; set; }
+
+    public bool IsUser => MerupakanAdmin == 0;
+    public bool IsAdminMaster => MerupakanAdmin == 1;
+    public bool IsAdminMaskapai => MerupakanAdmin == 2;
 }

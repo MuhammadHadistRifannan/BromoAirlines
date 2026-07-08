@@ -82,6 +82,11 @@ public sealed class UserManagementService
             return UserManagementServiceResult.Failed("Tanggal lahir tidak boleh di masa depan.");
         }
 
+        if (akun.MerupakanAdmin < 0 || akun.MerupakanAdmin > 2)
+        {
+            return UserManagementServiceResult.Failed("Role user tidak valid.");
+        }
+
         return await ValidateUniqueUsernameAsync(akun.Username, ignoredId);
     }
 

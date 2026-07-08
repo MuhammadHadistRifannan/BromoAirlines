@@ -110,9 +110,9 @@ public sealed class TransaksiRepository
         using var command = new MySqlCommand(
             """
             INSERT INTO TransaksiHeader
-            (AkunID, TanggalTransaksi, JadwalPenerbanganID, JumlahPenumpang, TotalHarga, KodePromoID)
+            (AkunID, TanggalTransaksi, JadwalPenerbanganID, JumlahPenumpang, MaskapaiID, TotalHarga, KodePromoID)
             VALUES
-            (@AkunID, @TanggalTransaksi, @JadwalPenerbanganID, @JumlahPenumpang, @TotalHarga, @KodePromoID)
+            (@AkunID, @TanggalTransaksi, @JadwalPenerbanganID, @JumlahPenumpang, @MaskapaiID, @TotalHarga, @KodePromoID)
             """,
             connection,
             (MySqlTransaction)transaction);
@@ -121,6 +121,7 @@ public sealed class TransaksiRepository
         command.Parameters.AddWithValue("@TanggalTransaksi", transaksiHeader.TanggalTransaksi);
         command.Parameters.AddWithValue("@JadwalPenerbanganID", transaksiHeader.JadwalPenerbanganID);
         command.Parameters.AddWithValue("@JumlahPenumpang", transaksiHeader.JumlahPenumpang);
+        command.Parameters.AddWithValue("@MaskapaiID", transaksiHeader.MaskapaiID);
         command.Parameters.AddWithValue("@TotalHarga", transaksiHeader.TotalHarga);
         command.Parameters.AddWithValue("@KodePromoID", transaksiHeader.KodePromoID ?? (object)DBNull.Value);
 

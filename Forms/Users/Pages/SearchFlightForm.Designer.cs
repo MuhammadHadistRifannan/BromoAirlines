@@ -22,6 +22,9 @@ partial class SearchFlightForm
         btnSearch = new Button();
         numJumlahPenumpang = new NumericUpDown();
         lblJumlahPenumpang = new Label();
+        cmbMaskapai = new ComboBox();
+        lblMaskapai = new Label();
+        chkFilterTanggal = new CheckBox();
         dtpTanggalBerangkat = new DateTimePicker();
         lblTanggalBerangkat = new Label();
         cmbBandaraTujuan = new ComboBox();
@@ -65,6 +68,9 @@ partial class SearchFlightForm
         panelSearch.Controls.Add(btnSearch);
         panelSearch.Controls.Add(numJumlahPenumpang);
         panelSearch.Controls.Add(lblJumlahPenumpang);
+        panelSearch.Controls.Add(cmbMaskapai);
+        panelSearch.Controls.Add(lblMaskapai);
+        panelSearch.Controls.Add(chkFilterTanggal);
         panelSearch.Controls.Add(dtpTanggalBerangkat);
         panelSearch.Controls.Add(lblTanggalBerangkat);
         panelSearch.Controls.Add(cmbBandaraTujuan);
@@ -129,6 +135,38 @@ partial class SearchFlightForm
         lblJumlahPenumpang.Size = new Size(164, 23);
         lblJumlahPenumpang.TabIndex = 6;
         lblJumlahPenumpang.Text = "Jumlah Penumpang";
+        // 
+        // cmbMaskapai
+        // 
+        cmbMaskapai.DropDownStyle = ComboBoxStyle.DropDown;
+        cmbMaskapai.FormattingEnabled = true;
+        cmbMaskapai.Location = new Point(370, 166);
+        cmbMaskapai.Name = "cmbMaskapai";
+        cmbMaskapai.Size = new Size(300, 28);
+        cmbMaskapai.TabIndex = 11;
+        // 
+        // lblMaskapai
+        // 
+        lblMaskapai.AutoSize = true;
+        lblMaskapai.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+        lblMaskapai.ForeColor = Color.Navy;
+        lblMaskapai.Location = new Point(370, 132);
+        lblMaskapai.Name = "lblMaskapai";
+        lblMaskapai.Size = new Size(83, 23);
+        lblMaskapai.TabIndex = 10;
+        lblMaskapai.Text = "Maskapai";
+        // 
+        // chkFilterTanggal
+        // 
+        chkFilterTanggal.AutoSize = true;
+        chkFilterTanggal.Font = new Font("Segoe UI", 9F);
+        chkFilterTanggal.ForeColor = Color.DimGray;
+        chkFilterTanggal.Location = new Point(32, 203);
+        chkFilterTanggal.Name = "chkFilterTanggal";
+        chkFilterTanggal.Size = new Size(124, 24);
+        chkFilterTanggal.TabIndex = 12;
+        chkFilterTanggal.Text = "Filter tanggal";
+        chkFilterTanggal.UseVisualStyleBackColor = true;
         // 
         // dtpTanggalBerangkat
         // 
@@ -340,6 +378,9 @@ partial class SearchFlightForm
     private Label lblBandaraTujuan;
     private DateTimePicker dtpTanggalBerangkat;
     private Label lblTanggalBerangkat;
+    private CheckBox chkFilterTanggal;
+    private ComboBox cmbMaskapai;
+    private Label lblMaskapai;
     private NumericUpDown numJumlahPenumpang;
     private Label lblJumlahPenumpang;
     private Button btnSearch;

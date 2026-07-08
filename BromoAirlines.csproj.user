@@ -25,6 +25,27 @@
     <Compile Update="Forms\Admin\Pages\UserManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\AirlineAdmin\Pages\DashboardMaskapaiPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\AirlineAdmin\Pages\MaskapaiJadwalPenerbanganForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\AirlineAdmin\Pages\MaskapaiKodePromoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\AirlineAdmin\Pages\MaskapaiPlaceholderPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\AirlineAdmin\Pages\MaskapaiTransactionReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\AirlineAdmin\Sidebar\DashboardMaskapaiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\AirlineAdmin\Sidebar\SidebarMaskapai.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Forms\Auth\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

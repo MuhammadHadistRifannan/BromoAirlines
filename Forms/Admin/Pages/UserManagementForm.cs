@@ -133,7 +133,7 @@ namespace BromoAirlines.Forms
                     item.TanggalLahir,
                     item.NomorTelepon,
                     item.MerupakanAdmin,
-                    item.MerupakanAdmin ? "Admin" : "User");
+                    GetRoleName(item.MerupakanAdmin));
             }
         }
 
@@ -145,7 +145,7 @@ namespace BromoAirlines.Forms
             txtNama.Text = Convert.ToString(row.Cells["Nama"].Value);
             dtpTanggalLahir.Value = Convert.ToDateTime(row.Cells["TanggalLahir"].Value);
             txtNomorTelepon.Text = Convert.ToString(row.Cells["NomorTelepon"].Value);
-            chkMerupakanAdmin.Checked = Convert.ToBoolean(row.Cells["MerupakanAdmin"].Value);
+            chkMerupakanAdmin.Checked = Convert.ToInt32(row.Cells["MerupakanAdmin"].Value) == 1;
             btnTambah.Enabled = false;
             btnEdit.Enabled = true;
             btnHapus.Enabled = true;
@@ -160,7 +160,7 @@ namespace BromoAirlines.Forms
                 Nama = txtNama.Text,
                 TanggalLahir = dtpTanggalLahir.Value,
                 NomorTelepon = txtNomorTelepon.Text,
-                MerupakanAdmin = chkMerupakanAdmin.Checked
+                MerupakanAdmin = chkMerupakanAdmin.Checked ? 1 : 0
             };
         }
 
@@ -198,6 +198,16 @@ namespace BromoAirlines.Forms
         private static void ShowMessage(string message, MessageBoxIcon icon)
         {
             MessageBox.Show(message, "User Management", MessageBoxButtons.OK, icon);
+        }
+
+        private static string GetRoleName(int roleValue)
+        {
+            return roleValue switch
+            {
+                1 => "Admin Master",
+                2 => "Admin Maskapai",
+                _ => "User"
+            };
         }
     }
 }

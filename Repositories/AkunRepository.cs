@@ -211,7 +211,7 @@ public sealed class AkunRepository
             Email = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
             TanggalLahir = reader.GetDateTime(5),
             NomorTelepon = reader.GetString(6),
-            MerupakanAdmin = reader.GetBoolean(7)
+            MerupakanAdmin = reader.GetInt32(7)
         };
     }
 

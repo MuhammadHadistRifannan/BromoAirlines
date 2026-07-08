@@ -16,4 +16,15 @@ public sealed class UserBookingService
     {
         return await _kodePromoRepository.GetActiveAsync(DateTime.Today);
     }
+
+    public async Task<List<KodePromo>> GetActivePromosAsync(int maskapaiId)
+    {
+        if (maskapaiId <= 0)
+        {
+            return new List<KodePromo>();
+        }
+
+        return await _kodePromoRepository.GetActiveByMaskapaiAsync(maskapaiId, DateTime.Today);
+    }
+
 }

@@ -26,10 +26,28 @@ public sealed class JadwalPenerbanganRepository
         return jadwal;
     }
 
+    public async Task<List<JadwalPenerbanganView>> SearchByMaskapaiAsync(int maskapaiId, string keyword)
+    {
+        var jadwal = new List<JadwalPenerbanganView>();
+        using var connection = Database.CreateConnection();
+        using var command = CreateSearchByMaskapaiCommand(connection, maskapaiId, keyword);
+
+        await connection.OpenAsync();
+        using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            jadwal.Add(MapJadwalView(reader));
+        }
+
+        return jadwal;
+    }
+
     public async Task<List<JadwalPenerbanganView>> SearchForUserAsync(
         int bandaraAsalId,
         int bandaraTujuanId,
-        DateTime tanggalBerangkat)
+        DateTime tanggalBerangkat,
+        int maskapaiId = 0,
+        bool useTanggal = true)
     {
         var jadwal = new List<JadwalPenerbanganView>();
         using var connection = Database.CreateConnection();
@@ -37,7 +55,9 @@ public sealed class JadwalPenerbanganRepository
             connection,
             bandaraAsalId,
             bandaraTujuanId,
-            tanggalBerangkat);
+            tanggalBerangkat,
+            maskapaiId,
+            useTanggal);
 
         await connection.OpenAsync();
         using var reader = await command.ExecuteReaderAsync();
@@ -117,6 +137,37 @@ public sealed class JadwalPenerbanganRepository
         await command.ExecuteNonQueryAsync();
     }
 
+    public async Task DeleteByMaskapaiAsync(int id, int maskapaiId)
+    {
+        using var connection = Database.CreateConnection();
+        using var command = new MySqlCommand(
+            "DELETE FROM JadwalPenerbangan WHERE ID = @ID AND MaskapaiID = @MaskapaiID",
+            connection);
+
+        command.Parameters.AddWithValue("@ID", id);
+        command.Parameters.AddWithValue("@MaskapaiID", maskapaiId);
+        await connection.OpenAsync();
+        await command.ExecuteNonQueryAsync();
+    }
+
+    public async Task<bool> BelongsToMaskapaiAsync(int id, int maskapaiId)
+    {
+        using var connection = Database.CreateConnection();
+        using var command = new MySqlCommand(
+            """
+            SELECT COUNT(1)
+            FROM JadwalPenerbangan
+            WHERE ID = @ID AND MaskapaiID = @MaskapaiID
+            """,
+            connection);
+
+        command.Parameters.AddWithValue("@ID", id);
+        command.Parameters.AddWithValue("@MaskapaiID", maskapaiId);
+        await connection.OpenAsync();
+        var count = Convert.ToInt32(await command.ExecuteScalarAsync());
+        return count > 0;
+    }
+
     public async Task<bool> IsKodePenerbanganExistsAsync(string kodePenerbangan, int ignoredId)
     {
         using var connection = Database.CreateConnection();
@@ -130,6 +181,29 @@ public sealed class JadwalPenerbanganRepository
 
         command.Parameters.AddWithValue("@KodePenerbangan", kodePenerbangan);
         command.Parameters.AddWithValue("@IgnoredID", ignoredId);
+        await connection.OpenAsync();
+        var count = Convert.ToInt32(await command.ExecuteScalarAsync());
+        return count > 0;
+    }
+
+    public async Task<bool> HasOverlapAsync(JadwalPenerbangan jadwal, int ignoredId)
+    {
+        using var connection = Database.CreateConnection();
+        using var command = new MySqlCommand(
+            """
+            SELECT COUNT(1)
+            FROM JadwalPenerbangan
+            WHERE MaskapaiID = @MaskapaiID
+              AND ID <> @IgnoredID
+              AND TanggalWaktuKeberangkatan < @ArriveAt
+              AND DATE_ADD(TanggalWaktuKeberangkatan, INTERVAL DurasiPenerbangan MINUTE) > @DepartAt
+            """,
+            connection);
+
+        command.Parameters.AddWithValue("@MaskapaiID", jadwal.MaskapaiID);
+        command.Parameters.AddWithValue("@IgnoredID", ignoredId);
+        command.Parameters.AddWithValue("@DepartAt", jadwal.TanggalWaktuKeberangkatan);
+        command.Parameters.AddWithValue("@ArriveAt", jadwal.TanggalWaktuKeberangkatan.AddMinutes(jadwal.DurasiPenerbangan));
         await connection.OpenAsync();
         var count = Convert.ToInt32(await command.ExecuteScalarAsync());
         return count > 0;
@@ -164,11 +238,10 @@ public sealed class JadwalPenerbanganRepository
         return command;
     }
 
-    private static MySqlCommand CreateUserSearchCommand(
+    private static MySqlCommand CreateSearchByMaskapaiCommand(
         MySqlConnection connection,
-        int bandaraAsalId,
-        int bandaraTujuanId,
-        DateTime tanggalBerangkat)
+        int maskapaiId,
+        string keyword)
     {
         var command = new MySqlCommand(
             """
@@ -181,9 +254,46 @@ public sealed class JadwalPenerbanganRepository
             INNER JOIN Bandara bk ON bk.ID = jp.BandaraKeberangkatanID
             INNER JOIN Bandara bt ON bt.ID = jp.BandaraTujuanID
             INNER JOIN Maskapai m ON m.ID = jp.MaskapaiID
-            WHERE jp.BandaraKeberangkatanID = @BandaraAsalID
-              AND jp.BandaraTujuanID = @BandaraTujuanID
-              AND DATE(jp.TanggalWaktuKeberangkatan) = @TanggalBerangkat
+            WHERE jp.MaskapaiID = @MaskapaiID
+              AND (@Keyword = ''
+                   OR jp.KodePenerbangan LIKE @Search
+                   OR bk.Nama LIKE @Search
+                   OR bk.KodeIATA LIKE @Search
+                   OR bt.Nama LIKE @Search
+                   OR bt.KodeIATA LIKE @Search)
+            ORDER BY jp.TanggalWaktuKeberangkatan DESC, jp.KodePenerbangan
+            """,
+            connection);
+
+        command.Parameters.AddWithValue("@MaskapaiID", maskapaiId);
+        command.Parameters.AddWithValue("@Keyword", keyword.Trim());
+        command.Parameters.AddWithValue("@Search", $"%{keyword.Trim()}%");
+        return command;
+    }
+
+    private static MySqlCommand CreateUserSearchCommand(
+        MySqlConnection connection,
+        int bandaraAsalId,
+        int bandaraTujuanId,
+        DateTime tanggalBerangkat,
+        int maskapaiId,
+        bool useTanggal)
+    {
+        var command = new MySqlCommand(
+            """
+            SELECT jp.ID, jp.KodePenerbangan,
+                   jp.BandaraKeberangkatanID, CONCAT(bk.KodeIATA, ' - ', bk.Nama) AS BandaraKeberangkatan,
+                   jp.BandaraTujuanID, CONCAT(bt.KodeIATA, ' - ', bt.Nama) AS BandaraTujuan,
+                   jp.MaskapaiID, m.Nama AS Maskapai,
+                   jp.TanggalWaktuKeberangkatan, jp.DurasiPenerbangan, jp.HargaPerTiket
+            FROM JadwalPenerbangan jp
+            INNER JOIN Bandara bk ON bk.ID = jp.BandaraKeberangkatanID
+            INNER JOIN Bandara bt ON bt.ID = jp.BandaraTujuanID
+            INNER JOIN Maskapai m ON m.ID = jp.MaskapaiID
+            WHERE (@BandaraAsalID = 0 OR jp.BandaraKeberangkatanID = @BandaraAsalID)
+              AND (@BandaraTujuanID = 0 OR jp.BandaraTujuanID = @BandaraTujuanID)
+              AND (@UseTanggal = 0 OR DATE(jp.TanggalWaktuKeberangkatan) = @TanggalBerangkat)
+              AND (@MaskapaiID = 0 OR jp.MaskapaiID = @MaskapaiID)
             ORDER BY jp.TanggalWaktuKeberangkatan, jp.KodePenerbangan
             """,
             connection);
@@ -191,6 +301,8 @@ public sealed class JadwalPenerbanganRepository
         command.Parameters.AddWithValue("@BandaraAsalID", bandaraAsalId);
         command.Parameters.AddWithValue("@BandaraTujuanID", bandaraTujuanId);
         command.Parameters.AddWithValue("@TanggalBerangkat", tanggalBerangkat.Date);
+        command.Parameters.AddWithValue("@MaskapaiID", maskapaiId);
+        command.Parameters.AddWithValue("@UseTanggal", useTanggal ? 1 : 0);
         return command;
     }
 

@@ -135,7 +135,7 @@ public sealed class AuthService
             Password = password.Trim(),
             TanggalLahir = tanggalLahir.Date,
             NomorTelepon = nomorTelepon.Trim(),
-            MerupakanAdmin = false
+            MerupakanAdmin = 0
         };
     }
 }

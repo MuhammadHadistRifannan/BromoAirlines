@@ -19,7 +19,8 @@ public partial class DashboardUserForm : Form
         _bookingService = new UserBookingService(new KodePromoRepository());
         _searchFlightService = new UserSearchFlightService(
             new BandaraRepository(),
-            new JadwalPenerbanganRepository());
+            new JadwalPenerbanganRepository(),
+            new MaskapaiRepository());
         _profileService = new UserProfileService(new AkunRepository());
         _transactionService = new UserTransactionService(new TransaksiRepository());
 
@@ -83,14 +84,14 @@ public partial class DashboardUserForm : Form
 
     private void SearchFlightDetailRequested(object? sender, FlightSelectedEventArgs e)
     {
-        var form = new FlightDetailForm(e.Flight);
+        var form = new FlightDetailForm(e.Flight, e.Maskapai);
         form.BookingRequested += FlightDetailBookingRequested;
         ChangePanel(form);
     }
 
     private void FlightDetailBookingRequested(object? sender, BookingRequestedEventArgs e)
     {
-        var form = new BookingForm(_bookingService, e.Flight);
+        var form = new BookingForm(_bookingService, e.Flight, e.Maskapai);
         form.PassengerRequested += BookingPassengerRequested;
         ChangePanel(form);
     }

@@ -48,6 +48,17 @@ CREATE TABLE `Maskapai`
 	`Deskripsi`						LONGTEXT			NOT NULL
 );
 
+CREATE TABLE `AdminMaskapai`
+(
+	`ID`							INT				PRIMARY KEY		AUTO_INCREMENT,
+	`UserID`						INT				NOT NULL,
+	`MaskapaiID`					INT				NOT NULL,
+
+	CONSTRAINT FK_AdminMaskapai_User FOREIGN KEY (`UserID`) REFERENCES `Akun`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FK_AdminMaskapai_Maskapai FOREIGN KEY (`MaskapaiID`) REFERENCES `Maskapai`(`ID`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT UQ_AdminMaskapai_User UNIQUE (`UserID`)
+);
+
 -- SQLINES DEMO *** rbangan
 CREATE TABLE `JadwalPenerbangan`
 (
@@ -70,10 +81,13 @@ CREATE TABLE `KodePromo`
 (
 	`ID`							INT				PRIMARY KEY		AUTO_INCREMENT,
 	`Kode`							VARCHAR(100)	NOT NULL,
+	`MaskapaiID`					INT				NOT NULL,
 	`PersentaseDiskon`				DOUBLE			NOT NULL,
 	`MaksimumDiskon`				DOUBLE			NOT NULL,
 	`BerlakuSampai`					DATE			NOT NULL,
-	`Deskripsi`						LONGTEXT			NOT NULL
+	`Deskripsi`						LONGTEXT			NOT NULL,
+
+	CONSTRAINT FK_MaskapaiID_KodePromo_Maskapai FOREIGN KEY (`MaskapaiID`) REFERENCES `Maskapai`(`ID`)
 );
 
 -- SQLINES DEMO *** rbangan
@@ -104,11 +118,13 @@ CREATE TABLE `TransaksiHeader`
 	`TanggalTransaksi`				DATETIME(3)		NOT NULL,
 	`JadwalPenerbanganID`			INT				NOT NULL,
 	`JumlahPenumpang`				INT				NOT NULL,
+	`MaskapaiID`					INT				NOT NULL,
 	`TotalHarga`					DOUBLE			NOT NULL,
 	`KodePromoID`					INT				NULL,
 
 	CONSTRAINT FK_AkunID_TransaksiHeader_Akun FOREIGN KEY (`AkunID`) REFERENCES `Akun`(`ID`),
 	CONSTRAINT FK_JadwalPenerbanganID_TransaksiHeader_Jadwal FOREIGN KEY (`JadwalPenerbanganID`) REFERENCES `JadwalPenerbangan`(`ID`),
+	CONSTRAINT FK_TransaksiHeader_Maskapai FOREIGN KEY (`MaskapaiID`) REFERENCES `Maskapai`(`ID`),
 	CONSTRAINT FK_KodePromoID_TransaksiHeader_KodePromo FOREIGN KEY (`KodePromoID`) REFERENCES `KodePromo`(`ID`)
 );
 
@@ -1067,8 +1083,8 @@ INSERT INTO `JadwalPenerbangan` (`KodePenerbangan`, `BandaraKeberangkatanID`, `B
 
 
 
-INSERT INTO `KodePromo` (`Kode`, `PersentaseDiskon`, `MaksimumDiskon`, `BerlakuSampai`, `Deskripsi`) VALUES ('BROMOAJAYUK', 15, 100000, '2023-09-09', 'Yuk pakai diskon ini');
-INSERT INTO `KodePromo` (`Kode`, `PersentaseDiskon`, `MaksimumDiskon`, `BerlakuSampai`, `Deskripsi`) VALUES ('NAIKBROMOAIRLINES', 10, 150000, '2023-09-09', 'Bromo Airlines??? Si Paling Terbang!!!');
+INSERT INTO `KodePromo` (`Kode`, `MaskapaiID`, `PersentaseDiskon`, `MaksimumDiskon`, `BerlakuSampai`, `Deskripsi`) VALUES ('BROMOAJAYUK', 1, 15, 100000, '2023-09-09', 'Yuk pakai diskon ini');
+INSERT INTO `KodePromo` (`Kode`, `MaskapaiID`, `PersentaseDiskon`, `MaksimumDiskon`, `BerlakuSampai`, `Deskripsi`) VALUES ('NAIKBROMOAIRLINES', 2, 10, 150000, '2023-09-09', 'Bromo Airlines??? Si Paling Terbang!!!');
 
 
 
@@ -1082,8 +1098,8 @@ INSERT INTO `StatusPenerbangan` (`Nama`) VALUES ('Cancel');
 
 
 
-INSERT INTO `TransaksiHeader` (`AkunID`, `TanggalTransaksi`, `JadwalPenerbanganID`, `JumlahPenumpang`, `TotalHarga`, `KodePromoID`) VALUES (2, '2023-04-01', 1, 3, 4568100, NULL);
-INSERT INTO `TransaksiHeader` (`AkunID`, `TanggalTransaksi`, `JadwalPenerbanganID`, `JumlahPenumpang`, `TotalHarga`, `KodePromoID`) VALUES (3, '2023-04-01', 2, 5, 6342500, 2);
+INSERT INTO `TransaksiHeader` (`AkunID`, `TanggalTransaksi`, `JadwalPenerbanganID`, `JumlahPenumpang`, `MaskapaiID`, `TotalHarga`, `KodePromoID`) VALUES (2, '2023-04-01', 1, 3, 1, 4568100, NULL);
+INSERT INTO `TransaksiHeader` (`AkunID`, `TanggalTransaksi`, `JadwalPenerbanganID`, `JumlahPenumpang`, `MaskapaiID`, `TotalHarga`, `KodePromoID`) VALUES (3, '2023-04-01', 2, 5, 2, 6342500, 2);
 
 
 INSERT INTO `TransaksiDetail` (`TransaksiHeaderID`, `TitelPenumpang`, `NamaLengkapPenumpang`) VALUES (1, 'Nyonya', 'Ruthanne Daveley');

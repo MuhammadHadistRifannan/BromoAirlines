@@ -7,13 +7,16 @@ public partial class BookingForm : Form
 {
     private readonly UserBookingService _bookingService;
     private readonly JadwalPenerbanganView _flight;
+    private readonly Maskapai _maskapai;
 
-    public BookingForm(UserBookingService bookingService, JadwalPenerbanganView flight)
+    public BookingForm(UserBookingService bookingService, JadwalPenerbanganView flight, Maskapai maskapai)
     {
         _bookingService = bookingService;
         _flight = flight;
+        _maskapai = maskapai;
         InitializeComponent();
         Load += BookingFormLoad;
+
     }
 
     public event EventHandler<PassengerRequestedEventArgs>? PassengerRequested;
@@ -38,12 +41,15 @@ public partial class BookingForm : Form
     {
         try
         {
-            var promos = await _bookingService.GetActivePromosAsync();
+            var promos = await _bookingService.GetActivePromosAsync(GetSelectedMaskapaiId());
             cmbPromo.DataSource = null;
             cmbPromo.DisplayMember = nameof(KodePromo.Kode);
             cmbPromo.ValueMember = nameof(KodePromo.ID);
             cmbPromo.DataSource = promos;
             cmbPromo.SelectedIndex = -1;
+            lblPromoHint.Text = promos.Count == 0
+                ? "Tidak ada promo aktif untuk maskapai penerbangan ini."
+                : "Promo bersifat opsional dan akan dihitung pada tahap pembayaran.";
         }
         catch
         {
@@ -53,5 +59,10 @@ public partial class BookingForm : Form
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
         }
+    }
+
+    private int GetSelectedMaskapaiId()
+    {
+        return _maskapai.ID > 0 ? _maskapai.ID : _flight.MaskapaiID;
     }
 }

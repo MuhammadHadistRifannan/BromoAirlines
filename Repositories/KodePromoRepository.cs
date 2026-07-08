@@ -34,6 +34,32 @@ public sealed class KodePromoRepository
         return kodePromo;
     }
 
+    public async Task<List<KodePromo>> GetActiveByMaskapaiAsync(int maskapaiId, DateTime tanggal)
+    {
+        var kodePromo = new List<KodePromo>();
+        using var connection = Database.CreateConnection();
+        using var command = new MySqlCommand(
+            """
+            SELECT ID, Kode, MaskapaiID, PersentaseDiskon, MaksimumDiskon, BerlakuSampai, Deskripsi
+            FROM KodePromo
+            WHERE MaskapaiID = @MaskapaiID
+              AND BerlakuSampai >= @Tanggal
+            ORDER BY BerlakuSampai, Kode
+            """,
+            connection);
+
+        command.Parameters.AddWithValue("@MaskapaiID", maskapaiId);
+        command.Parameters.AddWithValue("@Tanggal", tanggal.Date);
+        await connection.OpenAsync();
+        using var reader = await command.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+        {
+            kodePromo.Add(MapKodePromoWithMaskapai(reader));
+        }
+
+        return kodePromo;
+    }
+
     public async Task<List<KodePromo>> SearchAsync(string keyword)
     {
         var kodePromo = new List<KodePromo>();
@@ -142,6 +168,20 @@ public sealed class KodePromoRepository
             MaksimumDiskon = reader.GetDouble(3),
             BerlakuSampai = reader.GetDateTime(4),
             Deskripsi = reader.GetString(5)
+        };
+    }
+
+    private static KodePromo MapKodePromoWithMaskapai(System.Data.Common.DbDataReader reader)
+    {
+        return new KodePromo
+        {
+            ID = reader.GetInt32(0),
+            Kode = reader.GetString(1),
+            MaskapaiID = reader.GetInt32(2),
+            PersentaseDiskon = reader.GetDouble(3),
+            MaksimumDiskon = reader.GetDouble(4),
+            BerlakuSampai = reader.GetDateTime(5),
+            Deskripsi = reader.GetString(6)
         };
     }
 
